@@ -237,7 +237,7 @@
         
         
         
-          32 分钟
+          33 分钟
         
       </span>
     
@@ -281,145 +281,148 @@
               <div class="markdown-body">
                 
                 <font size="3">
+
 <meta name="referrer" content="no-referrer">
-<h2 id="多源汇最大流">多源汇最大流</h2>
-<p>这种多起点题型很容易就能想到：</p>
+
+<h2 id="多源汇最大流"><a href="#多源汇最大流" class="headerlink" title="多源汇最大流"></a>多源汇最大流</h2><p>这种多起点题型很容易就能想到：</p>
 <ul>
-<li>
-<p>建立一个超级源点，从超级源点向所有源点连一条容量是无穷大的边</p>
+<li><p>建立一个超级源点，从超级源点向所有源点连一条容量是无穷大的边</p>
 </li>
-<li>
-<p>建立一个超级汇点， 所有汇点向超级汇点连一条容量为无穷大的边</p>
+<li><p>建立一个超级汇点， 所有汇点向超级汇点连一条容量为无穷大的边</p>
 </li>
 </ul>
 <p>在新图跑最大流即可得出原图的最大流。</p>
 <p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20221214091959047.png" srcset="/img/loading.gif" lazyload alt="image-20221214091959047"></p>
-<h3 id="模板题">模板题</h3>
-<h4 id="题目描述">题目描述</h4>
-<p>给定一个包含 n 个点 m 条边的有向图，并给定每条边的容量，边的容量非负。</p>
+<h3 id="模板题"><a href="#模板题" class="headerlink" title="模板题"></a>模板题</h3><h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>给定一个包含 n 个点 m 条边的有向图，并给定每条边的容量，边的容量非负。</p>
 <p>其中有 $S_c$ 个源点，$T_c$ 个汇点，图中可能存在重边和自环。</p>
 <p>保证源点集合和汇点集合没有交集，求整个网络的最大流。</p>
 <br>
-<h4 id="输入">输入</h4>
-<p>第一行包含四个整数 n，m，$S_c$，$T_C$</p>
+
+<h4 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h4><p>第一行包含四个整数 n，m，$S_c$，$T_C$</p>
 <p>第二行包含 $S_c$ 个整数，表示所有源点的编号</p>
 <p>第三行包含 $T_c$ 个整数，表示所有汇点的编号</p>
 <p>接下来 m 行，每行三个整数 u，v，c，表示从点 u 到点 v 存在一条有向边，容量为 c</p>
 <p>点的编号从 1 到 n</p>
-<h4 id="输出">输出</h4>
-<p>输出一个整数表示整个网络的最大流</p>
+<h4 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h4><p>输出一个整数表示整个网络的最大流</p>
 <br>
-<h4 id="样例">样例</h4>
-<p><strong>输入样例：</strong></p>
+
+<h4 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h4><p><strong>输入样例：</strong></p>
 <figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">4 </span><span class="hljs-number">5</span> <span class="hljs-number">2</span> <span class="hljs-number">2</span><br><span class="hljs-symbol">2 </span><span class="hljs-number">4</span><br><span class="hljs-symbol">1 </span><span class="hljs-number">3</span><br><span class="hljs-symbol">4 </span><span class="hljs-number">2</span> <span class="hljs-number">30</span><br><span class="hljs-symbol">4 </span><span class="hljs-number">3</span> <span class="hljs-number">20</span><br><span class="hljs-symbol">2 </span><span class="hljs-number">3</span> <span class="hljs-number">20</span><br><span class="hljs-symbol">2 </span><span class="hljs-number">1</span> <span class="hljs-number">30</span><br><span class="hljs-symbol">1 </span><span class="hljs-number">3</span> <span class="hljs-number">40</span><br></code></pre></td></tr></table></figure>
+
 <p><strong>输出样例：</strong></p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">70<br></code></pre></td></tr></table></figure>
+
 <br>
-<h4 id="code">Code</h4>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">1e5</span> + <span class="hljs-number">10</span>, M = <span class="hljs-number">1e6</span> + <span class="hljs-number">10</span>, INF = <span class="hljs-number">0x3f3f3f3f</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> MOD = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>;<br><span class="hljs-type">int</span> e[M], ne[M], h[N], w[M], idx;<br><span class="hljs-type">int</span> n, m, S, T, cur[N], d[N];<br><span class="hljs-type">int</span> sc, tc;<br><br><span class="hljs-comment">// dinic()</span><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span> </span>&#123;<br>    cin &gt;&gt; n &gt;&gt; m &gt;&gt; sc &gt;&gt; tc;<br>    S = <span class="hljs-number">0</span>, T = n + <span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">memset</span>(h, <span class="hljs-number">-1</span>, <span class="hljs-built_in">sizeof</span>(h));<br>    <br>    <span class="hljs-keyword">for</span> (re <span class="hljs-type">int</span> i = <span class="hljs-number">1</span>, x; i &lt;= sc; i++) &#123;<br>        cin &gt;&gt; x;<br>        <span class="hljs-built_in">add</span>(S, x, INF);<br>    &#125;<br>    <span class="hljs-keyword">for</span> (re <span class="hljs-type">int</span> i = <span class="hljs-number">1</span>, x; i &lt;= tc; i++) &#123;<br>        cin &gt;&gt; x;<br>        <span class="hljs-built_in">add</span>(x, T, INF);<br>    &#125;<br>    <span class="hljs-keyword">for</span> (re <span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i++) &#123;<br>        <span class="hljs-type">int</span> a, b, c;<br>        cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;<br>        <span class="hljs-built_in">add</span>(a, b, c);<br>    &#125;<br><br>    cout &lt;&lt; <span class="hljs-built_in">dinic</span>() &lt;&lt; endl;<br>    <span class="hljs-keyword">return</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="code"><a href="#Code" class="headerlink" title="Code"></a>Code</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">1e5</span> + <span class="hljs-number">10</span>, M = <span class="hljs-number">1e6</span> + <span class="hljs-number">10</span>, INF = <span class="hljs-number">0x3f3f3f3f</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> MOD = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>;<br><span class="hljs-type">int</span> e[M], ne[M], h[N], w[M], idx;<br><span class="hljs-type">int</span> n, m, S, T, cur[N], d[N];<br><span class="hljs-type">int</span> sc, tc;<br><br><span class="hljs-comment">// dinic()</span><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span> </span>&#123;<br>    cin &gt;&gt; n &gt;&gt; m &gt;&gt; sc &gt;&gt; tc;<br>    S = <span class="hljs-number">0</span>, T = n + <span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">memset</span>(h, <span class="hljs-number">-1</span>, <span class="hljs-built_in">sizeof</span>(h));<br>    <br>    <span class="hljs-keyword">for</span> (re <span class="hljs-type">int</span> i = <span class="hljs-number">1</span>, x; i &lt;= sc; i++) &#123;<br>        cin &gt;&gt; x;<br>        <span class="hljs-built_in">add</span>(S, x, INF);<br>    &#125;<br>    <span class="hljs-keyword">for</span> (re <span class="hljs-type">int</span> i = <span class="hljs-number">1</span>, x; i &lt;= tc; i++) &#123;<br>        cin &gt;&gt; x;<br>        <span class="hljs-built_in">add</span>(x, T, INF);<br>    &#125;<br>    <span class="hljs-keyword">for</span> (re <span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i++) &#123;<br>        <span class="hljs-type">int</span> a, b, c;<br>        cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;<br>        <span class="hljs-built_in">add</span>(a, b, c);<br>    &#125;<br><br>    cout &lt;&lt; <span class="hljs-built_in">dinic</span>() &lt;&lt; endl;<br>    <span class="hljs-keyword">return</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <br>
-<h2 id="最大流关键边">最大流关键边</h2>
-<p><font color="#008ad0">只给其扩大容量之后整个流网络的最大流能够变大，对于这样的边我们称之为关键边。</font></p>
+
+<h2 id="最大流关键边"><a href="#最大流关键边" class="headerlink" title="最大流关键边"></a>最大流关键边</h2><p><font color="#008ad0">只给其扩大容量之后整个流网络的最大流能够变大，对于这样的边我们称之为关键边。</font></p>
 <br>
+
 <p>判断 u-&gt;v 是否为关键边：</p>
 <ul>
-<li>
-<p>在某一个最大可行流中，这条边的流量是满的</p>
+<li><p>在某一个最大可行流中，这条边的流量是满的</p>
 </li>
-<li>
-<p>在当前残留网络中，存在一条 S-&gt;u 和 v-&gt;T 的路径</p>
+<li><p>在当前残留网络中，存在一条 S-&gt;u 和 v-&gt;T 的路径</p>
 </li>
 </ul>
 <br>
+
 <p>具体地：</p>
 <ol>
-<li>
-<p>我们先对原图做一遍dinic</p>
+<li><p>我们先对原图做一遍dinic</p>
 </li>
-<li>
-<p>在当前最大流的残留网络上进行搜索</p>
+<li><p>在当前最大流的残留网络上进行搜索</p>
 <ul>
 <li>在其残留网络上沿着容量大于0的边走，所有从源点能够到达的点和所有汇点能够到达的点打上标记</li>
 </ul>
 </li>
-<li>
-<p>当一条边满足：满流（f[i] == 0），并且他的起始点能从 S 点出发搜索到，终止点能够从 T 点出发搜索到，则为关键边。</p>
+<li><p>当一条边满足：满流（f[i] &#x3D;&#x3D; 0），并且他的起始点能从 S 点出发搜索到，终止点能够从 T 点出发搜索到，则为关键边。</p>
 </li>
 </ol>
 <br>
+
 <p><strong>从汇点搜的时候需要用反向边判断，即：</strong></p>
 <p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20221214101357922.png" srcset="/img/loading.gif" lazyload alt="image-20221214101357922"></p>
 <p>我们用一号类型的边找到点，再用二号类型的边（即反向边）进行判断</p>
 <br>
-<h3 id="模板题">模板题</h3>
-<h4 id="题目描述">题目描述</h4>
-<p>伊基编写了一个最大流程序，并计算出了当前运输网络的最大运输能力。</p>
+
+<h3 id="模板题"><a href="#模板题-1" class="headerlink" title="模板题"></a>模板题</h3><h4 id="题目描述"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h4><p>伊基编写了一个最大流程序，并计算出了当前运输网络的最大运输能力。</p>
 <p>他对运输速度的现状十分不满，并希望能够提高国家的运输能力。</p>
 <p>提高运输能力的方法很简单，伊基将在运输网络中重建一些道路，以使这些道路具有更高的运输能力。</p>
 <p>但是不幸的是，凤凰国的财力有限，道路建设经费只够重建一条道路，伊基想要知道共有多少条道路可以纳入重建道路候选名单，这些道路需要满足，将其重建后，国家的总运输能力能够增加。</p>
 <br>
-<h4 id="输入">输入</h4>
-<p>第一行包含 N 和 M，分别表示城市和道路的数量</p>
+
+<h4 id="输入"><a href="#输入-1" class="headerlink" title="输入"></a>输入</h4><p>第一行包含 N 和 M，分别表示城市和道路的数量</p>
 <p>接下来 M 行，每行包含三个整数 a，b，c，表示存在一条道路从城市 a 通往城市 b，且运输能力为 c</p>
 <p>所有道路都是有方向的，城市编号从 0 到 N−1</p>
 <p>生产日常商品的城市为 0 号城市，首都为 N−1 号城市</p>
-<h4 id="输出">输出</h4>
-<p>输出一个整数 K</p>
+<h4 id="输出"><a href="#输出-1" class="headerlink" title="输出"></a>输出</h4><p>输出一个整数 K</p>
 <p>表示存在 K 条道路，对其中每条道路进行重建都会增加运输网络的运输能力。</p>
 <br>
-<h4 id="样例">样例</h4>
-<p><strong>输入样例：</strong></p>
+
+<h4 id="样例"><a href="#样例-1" class="headerlink" title="样例"></a>样例</h4><p><strong>输入样例：</strong></p>
 <figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">2 </span><span class="hljs-number">1</span><br><span class="hljs-symbol">0 </span><span class="hljs-number">1</span> <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
 <p><strong>输出样例：</strong></p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">1<br></code></pre></td></tr></table></figure>
+
 <br>
-<h4 id="code">Code</h4>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">1000</span> + <span class="hljs-number">10</span>, M = <span class="hljs-number">2e5</span> + <span class="hljs-number">10</span>, INF = <span class="hljs-number">0x3f3f3f3f</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> MOD = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>;<br><span class="hljs-type">int</span> e[M], ne[M], h[N], w[M], idx;<br><span class="hljs-type">int</span> n, m, S, T, cur[N], d[N];<br><span class="hljs-type">bool</span> vis_s[N], <span class="hljs-type">vis_t</span>[N];<br><br><span class="hljs-comment">// dinic（）</span><br><br><span class="hljs-function">il <span class="hljs-type">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">bool</span> st[], <span class="hljs-type">int</span> op)</span> </span>&#123;<br>    st[u] = <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">for</span> (re <span class="hljs-type">int</span> i = h[u]; ~i; i = ne[i]) &#123;<br>        <span class="hljs-type">int</span> j = i ^ op, ver = e[i];<br>        <span class="hljs-keyword">if</span> (w[j] &amp;&amp; !st[ver])   <span class="hljs-built_in">dfs</span>(ver, st, op);<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span> </span>&#123;<br>    cin &gt;&gt; n &gt;&gt; m;<br>    S = <span class="hljs-number">0</span>, T = n - <span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">memset</span>(h, <span class="hljs-number">-1</span>, <span class="hljs-built_in">sizeof</span>(h));<br><br>    <span class="hljs-keyword">for</span> (re <span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i++) &#123;<br>        <span class="hljs-type">int</span> a, b, c;    cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;<br>        <span class="hljs-built_in">add</span>(a, b, c);<br>    &#125;<br>    <span class="hljs-built_in">dinic</span>();<br><br>    <span class="hljs-built_in">dfs</span>(S, vis_s, <span class="hljs-number">0</span>);   <span class="hljs-comment">// 0 表示不需要用反向边来判断</span><br>    <span class="hljs-built_in">dfs</span>(T, <span class="hljs-type">vis_t</span>, <span class="hljs-number">1</span>);   <span class="hljs-comment">// 1 表示需要用反向边来判断</span><br><br>    <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (re <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; idx; i += <span class="hljs-number">2</span>) &#123;<br>        <span class="hljs-type">int</span> u = e[i ^ <span class="hljs-number">1</span>], v = e[i];<br>        <span class="hljs-keyword">if</span> (!w[i] &amp;&amp; vis_s[u] &amp;&amp; <span class="hljs-type">vis_t</span>[v])  ans++;<br>    &#125;<br><br>    cout &lt;&lt; ans &lt;&lt; endl;<br>    <span class="hljs-keyword">return</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h4 id="code"><a href="#Code-1" class="headerlink" title="Code"></a>Code</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">1000</span> + <span class="hljs-number">10</span>, M = <span class="hljs-number">2e5</span> + <span class="hljs-number">10</span>, INF = <span class="hljs-number">0x3f3f3f3f</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> MOD = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>;<br><span class="hljs-type">int</span> e[M], ne[M], h[N], w[M], idx;<br><span class="hljs-type">int</span> n, m, S, T, cur[N], d[N];<br><span class="hljs-type">bool</span> vis_s[N], <span class="hljs-type">vis_t</span>[N];<br><br><span class="hljs-comment">// dinic（）</span><br><br><span class="hljs-function">il <span class="hljs-type">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">bool</span> st[], <span class="hljs-type">int</span> op)</span> </span>&#123;<br>    st[u] = <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">for</span> (re <span class="hljs-type">int</span> i = h[u]; ~i; i = ne[i]) &#123;<br>        <span class="hljs-type">int</span> j = i ^ op, ver = e[i];<br>        <span class="hljs-keyword">if</span> (w[j] &amp;&amp; !st[ver])   <span class="hljs-built_in">dfs</span>(ver, st, op);<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span> </span>&#123;<br>    cin &gt;&gt; n &gt;&gt; m;<br>    S = <span class="hljs-number">0</span>, T = n - <span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">memset</span>(h, <span class="hljs-number">-1</span>, <span class="hljs-built_in">sizeof</span>(h));<br><br>    <span class="hljs-keyword">for</span> (re <span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i++) &#123;<br>        <span class="hljs-type">int</span> a, b, c;    cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;<br>        <span class="hljs-built_in">add</span>(a, b, c);<br>    &#125;<br>    <span class="hljs-built_in">dinic</span>();<br><br>    <span class="hljs-built_in">dfs</span>(S, vis_s, <span class="hljs-number">0</span>);   <span class="hljs-comment">// 0 表示不需要用反向边来判断</span><br>    <span class="hljs-built_in">dfs</span>(T, <span class="hljs-type">vis_t</span>, <span class="hljs-number">1</span>);   <span class="hljs-comment">// 1 表示需要用反向边来判断</span><br><br>    <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (re <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; idx; i += <span class="hljs-number">2</span>) &#123;<br>        <span class="hljs-type">int</span> u = e[i ^ <span class="hljs-number">1</span>], v = e[i];<br>        <span class="hljs-keyword">if</span> (!w[i] &amp;&amp; vis_s[u] &amp;&amp; <span class="hljs-type">vis_t</span>[v])  ans++;<br>    &#125;<br><br>    cout &lt;&lt; ans &lt;&lt; endl;<br>    <span class="hljs-keyword">return</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
 <br>
-<h2 id="最大流判定">最大流判定</h2>
-<p>直接看题。</p>
+
+<h2 id="最大流判定"><a href="#最大流判定" class="headerlink" title="最大流判定"></a>最大流判定</h2><p>直接看题。</p>
 <br>
-<h3 id="秘密挤奶机">秘密挤奶机</h3>
-<p><strong>题目链接：<a target="_blank" rel="noopener" href="http://poj.org/problem?id=2455">http://poj.org/problem?id=2455</a></strong></p>
-<h4 id="题目描述">题目描述</h4>
-<p>题目说现在有 n 个点，p 条边</p>
+
+<h3 id="秘密挤奶机"><a href="#秘密挤奶机" class="headerlink" title="秘密挤奶机"></a>秘密挤奶机</h3><p><strong>题目链接：<a target="_blank" rel="noopener" href="http://poj.org/problem?id=2455">http://poj.org/problem?id=2455</a></strong></p>
+<h4 id="题目描述"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h4><p>题目说现在有 n 个点，p 条边</p>
 <p>每条边只能走一次，现在要从 1 号点到 n 号点走 t 次</p>
 <p>求出所有走的边的最大值，使这个最大值最小</p>
 <br>
-<h4 id="输入">输入</h4>
-<p>第一行包含三个整数 N，P，T</p>
+
+<h4 id="输入"><a href="#输入-2" class="headerlink" title="输入"></a>输入</h4><p>第一行包含三个整数 N，P，T</p>
 <p>接下来 P 行，每行包含三个整数 a，b，c，表示地标 a 和 b之间存在一条长度为 c 的道路</p>
-<h4 id="输出">输出</h4>
-<p>输出一个整数，表示约翰必须使用的最长的单个道路的最小可能长度</p>
+<h4 id="输出"><a href="#输出-2" class="headerlink" title="输出"></a>输出</h4><p>输出一个整数，表示约翰必须使用的最长的单个道路的最小可能长度</p>
 <br>
-<h4 id="样例">样例</h4>
-<p><strong>输入样例：</strong></p>
+
+<h4 id="样例"><a href="#样例-2" class="headerlink" title="样例"></a>样例</h4><p><strong>输入样例：</strong></p>
 <figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">7 </span><span class="hljs-number">9</span> <span class="hljs-number">2</span><br><span class="hljs-symbol">1 </span><span class="hljs-number">2</span> <span class="hljs-number">2</span><br><span class="hljs-symbol">2 </span><span class="hljs-number">3</span> <span class="hljs-number">5</span><br><span class="hljs-symbol">3 </span><span class="hljs-number">7</span> <span class="hljs-number">5</span><br><span class="hljs-symbol">1 </span><span class="hljs-number">4</span> <span class="hljs-number">1</span><br><span class="hljs-symbol">4 </span><span class="hljs-number">3</span> <span class="hljs-number">1</span><br><span class="hljs-symbol">4 </span><span class="hljs-number">5</span> <span class="hljs-number">7</span><br><span class="hljs-symbol">5 </span><span class="hljs-number">7</span> <span class="hljs-number">1</span><br><span class="hljs-symbol">1 </span><span class="hljs-number">6</span> <span class="hljs-number">3</span><br><span class="hljs-symbol">6 </span><span class="hljs-number">7</span> <span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
+
 <p><strong>输出样例：</strong></p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">5<br></code></pre></td></tr></table></figure>
+
 <br>
+
 <p><strong>经典最大值最小化问题，可以直接二分出最大的边权 mid</strong></p>
 <p>看是否存在一个最大流，其中所有边权都小于等于 mid，且流量大于 K</p>
 <p>不断二分下去即可找到答案</p>
 <br>
+
 <p>那么现在的问题就是如何判断我们能不能只用长度小于 mid 的边，能走 t 次</p>
 <p>也就是如何写我们的check函数，我们可以使用最大流判定</p>
 <br>
+
 <p>我们可以按照这个图建一个网络流，给每条长度小于 mid 的边流量为 1，说明只能走一次</p>
 <p>大于 mid 的边流量为0，说明不能走</p>
 <p>源点设为 1，汇点设为 n，求一遍源点到汇点的最大流就能得到我们能走多少遍，再判断是否大于等于要求的 t 即可</p>
 <br>
+
 <p><strong>还有一个问题，就是无向图向有向图的转换</strong></p>
 <p>题目给定的是无向图，而网络流用的是有向图</p>
 <p>我们在建图时，对于一条无向边（u，v），我们建两条有向边 u -&gt; v 和 v -&gt; u 两条有向边</p>
-<p>Q：如下图，原网络中只能走一次，但是我们建了双向边的话就可以来回各走一次，不就不符合容量限制了吗？<br>
-<img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20221214113132889.png" srcset="/img/loading.gif" lazyload alt="image-20221214113132889"></p>
+<p>Q：如下图，原网络中只能走一次，但是我们建了双向边的话就可以来回各走一次，不就不符合容量限制了吗？<br><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20221214113132889.png" srcset="/img/loading.gif" lazyload alt="image-20221214113132889"></p>
 <p><strong>我们可以把正反各走一次看作没有流量经过，所以不影响容量限制</strong></p>
 <br>
-<h4 id="code">code</h4>
-<p>这里我们开始时先存边的长度tw[]，在二分时再修改边的容量w[]</p>
+
+<h4 id="code"><a href="#code" class="headerlink" title="code"></a>code</h4><p>这里我们开始时先存边的长度tw[]，在二分时再修改边的容量w[]</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">1000</span> + <span class="hljs-number">10</span>, M = <span class="hljs-number">2e5</span> + <span class="hljs-number">10</span>, INF = <span class="hljs-number">0x3f3f3f3f</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> MOD = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>;<br><span class="hljs-type">int</span> e[M], ne[M], h[N], w[M], idx;<br><span class="hljs-type">int</span> n, m, S, T, cur[N], d[N];<br><span class="hljs-type">int</span> k, tw[M];<br><br><span class="hljs-function">il <span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b, <span class="hljs-type">int</span> c)</span> </span>&#123;<br>    e[idx] = b, tw[idx] = c, ne[idx] = h[a], h[a] = idx++;<br>    e[idx] = a, tw[idx] = c, ne[idx] = h[b], h[b] = idx++;<br>&#125;<br><br><span class="hljs-comment">// dinic()</span><br><br><span class="hljs-function">il <span class="hljs-type">bool</span> <span class="hljs-title">check</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;<br>    <span class="hljs-comment">// 修改容量限制</span><br>    <span class="hljs-keyword">for</span> (re <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; idx; i++) &#123;<br>        <span class="hljs-keyword">if</span> (tw[i] &gt; x)  w[i] = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">else</span>    w[i] = <span class="hljs-number">1</span>;   <br>    &#125;<br><br>    <span class="hljs-type">int</span> res = <span class="hljs-built_in">dinic</span>();<br>    <span class="hljs-keyword">return</span> res &gt;= k;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span> </span>&#123;<br>    cin &gt;&gt; n &gt;&gt; m &gt;&gt; k;<br>    S = <span class="hljs-number">1</span>, T = n;<br>    <span class="hljs-built_in">memset</span>(h, <span class="hljs-number">-1</span>, <span class="hljs-built_in">sizeof</span>(h));<br>	<br>    <span class="hljs-comment">// 建图，记录边的长度tw[]</span><br>    <span class="hljs-keyword">for</span> (re <span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i++) &#123;<br>        <span class="hljs-type">int</span> a, b, c;    cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;<br>        <span class="hljs-built_in">add</span>(a, b, c);<br>    &#125;<br>	<br>    <span class="hljs-comment">// 二分</span><br>    <span class="hljs-type">int</span> l = <span class="hljs-number">1</span>, r = <span class="hljs-number">1e6</span>;<br>    <span class="hljs-keyword">while</span> (l &lt; r) &#123;<br>        <span class="hljs-type">int</span> mid = (l + r) &gt;&gt; <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">check</span>(mid)) r = mid;<br>        <span class="hljs-keyword">else</span>    l = mid + <span class="hljs-number">1</span>;<br>    &#125;<br><br>    cout &lt;&lt; l &lt;&lt; endl;<br>    <span class="hljs-keyword">return</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 </font>
+
 <br>
 
                 
