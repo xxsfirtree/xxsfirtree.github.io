@@ -284,40 +284,39 @@
               <div class="markdown-body">
                 
                 <font size="3">
-
 <meta name="referrer" content="no-referrer">
-
-<h2 id="最小割"><a href="#最小割" class="headerlink" title="最小割"></a>最小割</h2><p>最小割与最大流问题具有等价性。</p>
+<h2 id="最小割">最小割</h2>
+<p>最小割与最大流问题具有等价性。</p>
 <p>最大流 - 最小割定理保证最大流的流量与最小割的容量相等。</p>
 <p>利用这一性质，我们可以将最小割问题规约到最大流问题，用 EK 算法或者 Dinic 算法来寻找最小割。</p>
 <br>
-
 <p><strong>首先定义S-T Cut：</strong></p>
 <ul>
-<li><p>将所有的节点分成两个集合，起点 s 属于集合 S，终点 t 属于集合 T。</p>
+<li>
+<p>将所有的节点分成两个集合，起点 s 属于集合 S，终点 t 属于集合 T。</p>
 </li>
-<li><p>集合 S 和集合 T 的并集是整个节点</p>
+<li>
+<p>集合 S 和集合 T 的并集是整个节点</p>
 </li>
 </ul>
 <br>
-
 <p>下图就是一个 S-T Cut</p>
 <p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20230530105236436.png" srcset="/img/loading.gif" lazyload alt="image-20230530105236436"></p>
 <p>我们可以这样理解割的容量：</p>
 <p>割断从集合 S 流向集合 T 的管道，即上图中的</p>
 <p>$$（v_1-&gt;v_3，v_1-&gt;v_4，v_2-&gt;v_4）$$</p>
 <p>容量就是所有这些管道的容量之和</p>
-<p><strong>上图S-T Cut的容量为 2 + 2 + 2 &#x3D; 6</strong></p>
+<p><strong>上图S-T Cut的容量为 2 + 2 + 2 = 6</strong></p>
 <p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20221210120417218.png" srcset="/img/loading.gif" lazyload alt="image-20221210120417218"></p>
-<p>而这个S-T Cut 的容量就是2 + 1 &#x3D; 3</p>
+<p>而这个S-T Cut 的容量就是2 + 1 = 3</p>
 <p><strong>最小割就是一个最小容量的 S-T Cut</strong></p>
 <p>也就是我们用最小的成本来截断从集合 S 流向集合 T 的水流。</p>
 <p><strong>注意：最小割不一定唯一，比如下图两种 S-T Cut 的容量都是3。</strong></p>
 <p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20221210120709846.png" srcset="/img/loading.gif" lazyload alt="image-20221210120709846"></p>
 <br>
-
-<h2 id="最大流-最小割定理"><a href="#最大流-最小割定理" class="headerlink" title="最大流 - 最小割定理"></a>最大流 - 最小割定理</h2><p>对于一个网络流问题：</p>
-<p><font size="4" color="#004a97">最大流的流量 &#x3D; 最小割的容量</font></p>
+<h2 id="最大流-最小割定理">最大流 - 最小割定理</h2>
+<p>对于一个网络流问题：</p>
+<p><font size="4" color="#004a97">最大流的流量 = 最小割的容量</font></p>
 <p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20221210121007819.png" srcset="/img/loading.gif" lazyload alt="image-20221210121007819"></p>
 <p>将最小割转化成最大流问题：</p>
 <p>1、用任意方式得到最大流问题的残留网络</p>
@@ -325,31 +324,31 @@
 <p>3、在最终残留网中，从起点出发，找到所有能达到的点，这些节点作为集合S，剩下的点作为集合T。</p>
 <p>4、此时我们得到了最小割</p>
 <br>
-
-<h2 id="例题-网络战争"><a href="#例题-网络战争" class="headerlink" title="例题-网络战争"></a>例题-网络战争</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给出一个带权无向图 G &#x3D; (V, E)，每条边 <em>e</em> 有一个权 We</p>
+<h2 id="例题-网络战争">例题-网络战争</h2>
+<h3 id="题目描述">题目描述</h3>
+<p>给出一个带权无向图 G = (V, E)，每条边 <em>e</em> 有一个权 We</p>
 <p>求将点 s 和点 t 分开的一个边割集 C，使得该割集的平均边权最小，即最小化：</p>
 <p>$$\frac{\displaystyle\sum_{e\in C} w_e}{|C|}$$</p>
-<p><strong>注意：</strong> </p>
+<p><strong>注意：</strong></p>
 <p>边割集的定义与最小割中的割边的集合不同</p>
 <p>在本题中，一个边割集是指：将这些边删去之后，s 与 t 不再连通</p>
 <br>
-
-<h3 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h3><p>第一行包含四个整数 n，m，s，t，其中 n，m 分别表示无向图的点数、边数</p>
+<h3 id="输入">输入</h3>
+<p>第一行包含四个整数 n，m，s，t，其中 n，m 分别表示无向图的点数、边数</p>
 <p>接下来 m 行，每行包含三个整数 a，b，w，表示点 a 和 b 之间存在一条无向边，边权为 w</p>
 <p>点的编号从 1 到 n</p>
-<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><p>输出一个实数，表示将点 s 和点 t 分开的边割集的最小平均边权</p>
+<h3 id="输出">输出</h3>
+<p>输出一个实数，表示将点 s 和点 t 分开的边割集的最小平均边权</p>
 <p>结果保留两位小数</p>
 <br>
-
-<h3 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h3><p><strong>输入样例：</strong></p>
+<h3 id="样例">样例</h3>
+<p><strong>输入样例：</strong></p>
 <figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">6 </span><span class="hljs-number">8</span> <span class="hljs-number">1</span> <span class="hljs-number">6</span><br><span class="hljs-symbol">1 </span><span class="hljs-number">2</span> <span class="hljs-number">3</span><br><span class="hljs-symbol">1 </span><span class="hljs-number">3</span> <span class="hljs-number">3</span><br><span class="hljs-symbol">2 </span><span class="hljs-number">4</span> <span class="hljs-number">2</span><br><span class="hljs-symbol">2 </span><span class="hljs-number">5</span> <span class="hljs-number">2</span><br><span class="hljs-symbol">3 </span><span class="hljs-number">4</span> <span class="hljs-number">2</span><br><span class="hljs-symbol">3 </span><span class="hljs-number">5</span> <span class="hljs-number">2</span><br><span class="hljs-symbol">5 </span><span class="hljs-number">6</span> <span class="hljs-number">3</span><br><span class="hljs-symbol">4 </span><span class="hljs-number">6</span> <span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
-
 <p><strong>输出样例：</strong></p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">2</span>.<span class="hljs-number">00</span><br></code></pre></td></tr></table></figure>
-
 <br>
-
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p><strong>根据01分数规划，我们可以进行转化：</strong></p>
+<h3 id="分析">分析</h3>
+<p><strong>根据01分数规划，我们可以进行转化：</strong></p>
 <p>$$\frac{\sum W_e}{|C|}\ \ &lt;\ \ \lambda$$</p>
 <p>等价于</p>
 <p>$$\sum W_e\ \ &lt;\ \ \lambda * |C|$$</p>
@@ -361,12 +360,10 @@
 <p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20221215163931649.png" srcset="/img/loading.gif" lazyload alt="image-20221215163931649"></p>
 <p><font color="#2063c0">这个性质具有二段性，可以二分</font></p>
 <br>
-
 <p>那么式子的左边该怎么得到呢？</p>
 <p>首先我们可以建一个新图，新图上每条边的边权是原图的$W_e-\lambda$</p>
-<p>即 $W_e’&#x3D;W_e-\lambda$</p>
+<p>即 $W_e’=W_e-\lambda$</p>
 <br>
-
 <p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20221215170319645.png" srcset="/img/loading.gif" lazyload alt="image-20221215170319645"></p>
 <p><strong>我们注意到本题定义的割集并不是最小割中的割集</strong></p>
 <p>如上图所示：</p>
@@ -376,21 +373,21 @@
 </ul>
 <p>因为将绿色边删去之后，s 与 t 已经不再连通，此时再加上蓝色边仍然不连通</p>
 <br>
-
 <p>所以我们有以下结论：</p>
 <ul>
 <li>当 $W_e’&lt;0$，该边必选</li>
 </ul>
 <p>因为当前的边权小于零，一定会使最后的答案更小（即更优）</p>
 <ul>
-<li><p>对于无向边，添加双向边即可</p>
+<li>
+<p>对于无向边，添加双向边即可</p>
 </li>
-<li><p>在去掉权值小于零的边以后，就不需要再加额外的边，直接求最小割就是最终的答案</p>
+<li>
+<p>在去掉权值小于零的边以后，就不需要再加额外的边，直接求最小割就是最终的答案</p>
 </li>
 </ul>
 <p>因为额外的边只会令结果更大（而我们要求最小化结果）</p>
 <br>
-
 <p><strong>综上，本题的思路就是：</strong></p>
 <ol>
 <li>二分</li>
@@ -400,11 +397,9 @@
 </ol>
 <p><font color="#1a5cbe"><strong>另外本题的流量并不都是整数，所以需要用double</strong></font></p>
 <br>
-
-<h3 id="code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">2e5</span> + <span class="hljs-number">10</span>, M = N * <span class="hljs-number">2</span>, INF = <span class="hljs-number">0x3f3f3f3f</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> MOD = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">double</span> eps = <span class="hljs-number">1e-8</span>;<br><span class="hljs-type">int</span> e[M], ne[M], tw[N], h[N], idx;<br><span class="hljs-type">double</span> w[N];<br><span class="hljs-type">int</span> n, m, S, T, cur[N], d[N];<br><br><span class="hljs-function">il <span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b, <span class="hljs-type">int</span> c)</span> </span>&#123;<br>    e[idx] = b, tw[idx] = c, ne[idx] = h[a], h[a] = idx++;<br>    e[idx] = a, tw[idx] = <span class="hljs-number">0</span>, ne[idx] = h[b], h[b] = idx++;<br>&#125;<br><br><span class="hljs-function">il <span class="hljs-type">bool</span> <span class="hljs-title">bfs</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-built_in">memset</span>(d, <span class="hljs-number">-1</span>, <span class="hljs-keyword">sizeof</span> d);<br>    queue&lt;<span class="hljs-type">int</span>&gt; q;<br>    q.<span class="hljs-built_in">push</span>(S), d[S] = <span class="hljs-number">0</span>, cur[S] = h[S];<br>    <span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>()) &#123;<br>        <span class="hljs-type">int</span> t = q.<span class="hljs-built_in">front</span>();<br>        q.<span class="hljs-built_in">pop</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = h[t]; ~i; i = ne[i]) &#123;<br>            <span class="hljs-type">int</span> j = e[i];<br>            <span class="hljs-keyword">if</span> (d[j] == <span class="hljs-number">-1</span> &amp;&amp; w[i]) &#123;<br>                d[j] = d[t] + <span class="hljs-number">1</span>;<br>                cur[j] = h[j];<br>                <span class="hljs-keyword">if</span> (j == T) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>                q.<span class="hljs-built_in">push</span>(j);<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">double</span> limit)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (u == T) <span class="hljs-keyword">return</span> limit;<br>    <span class="hljs-type">double</span> flow = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = cur[u]; ~i &amp;&amp; flow &lt; limit; i = ne[i]) &#123;<br>        cur[u] = i;<br>        <span class="hljs-type">int</span> ver = e[i];<br>        <span class="hljs-keyword">if</span> (d[ver] == d[u] + <span class="hljs-number">1</span> &amp;&amp; w[i] &gt; <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-type">double</span> t = <span class="hljs-built_in">find</span>(ver, <span class="hljs-built_in">min</span>(w[i], limit - flow)); <br>            <span class="hljs-keyword">if</span> (!t) d[ver] = <span class="hljs-number">-1</span>;<br>            w[i] -= t, w[i ^ <span class="hljs-number">1</span>] += t, flow += t;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (flow == <span class="hljs-number">0</span>)  d[u] = <span class="hljs-number">-1</span>;<br>    <span class="hljs-keyword">return</span> flow;<br>&#125;<br><br><span class="hljs-function">il <span class="hljs-type">double</span> <span class="hljs-title">dinic</span><span class="hljs-params">(<span class="hljs-type">double</span> mid)</span> </span>&#123;<br>    <span class="hljs-type">double</span> res = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; idx; i += <span class="hljs-number">2</span>)<br>        <span class="hljs-keyword">if</span> (tw[i] &lt;= mid) &#123;<br>            res += tw[i] - mid;      <span class="hljs-comment">// 此时边权 wi - mid &lt; 0，加上更优</span><br>            w[i] = w[i ^ <span class="hljs-number">1</span>] = <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-keyword">else</span>    w[i] = w[i ^ <span class="hljs-number">1</span>] = tw[i] - mid;<br>    <br>    <span class="hljs-type">double</span> r = <span class="hljs-number">0</span>, flow;<br>    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">bfs</span>()) &#123;<br>        <span class="hljs-keyword">while</span> (flow = <span class="hljs-built_in">find</span>(S, INF))<br>            r += flow;<br>    &#125;<br>    <span class="hljs-keyword">return</span> r + res;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld%lld%lld%lld&quot;</span>, &amp;n, &amp;m, &amp;S, &amp;T);<br>    <br>    <span class="hljs-built_in">memset</span>(h, <span class="hljs-number">-1</span>, <span class="hljs-keyword">sizeof</span> h);<br>    <span class="hljs-keyword">for</span> (re <span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i++) &#123;<br>        <span class="hljs-type">int</span> a, b, c;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld%lld%lld&quot;</span>, &amp;a, &amp;b, &amp;c);<br>        <span class="hljs-built_in">add</span>(a, b, c);	<span class="hljs-comment">// 此处存边权</span><br>    &#125;<br>	<br>    <span class="hljs-comment">// 二分</span><br>    <span class="hljs-type">double</span> l = <span class="hljs-number">0</span>, r = <span class="hljs-number">1e7</span>;<br>    <span class="hljs-keyword">while</span> (r - l &gt; eps) &#123;<br>        <span class="hljs-type">double</span> mid = (l + r) / <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">dinic</span>(mid) &lt; <span class="hljs-number">0</span>)	r = mid;<br>        <span class="hljs-keyword">else</span>	l = mid;<br>    &#125;<br><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.2lf\n&quot;</span>, r);<br>    <span class="hljs-keyword">return</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
+<h3 id="code">Code</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">2e5</span> + <span class="hljs-number">10</span>, M = N * <span class="hljs-number">2</span>, INF = <span class="hljs-number">0x3f3f3f3f</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> MOD = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">double</span> eps = <span class="hljs-number">1e-8</span>;<br><span class="hljs-type">int</span> e[M], ne[M], tw[N], h[N], idx;<br><span class="hljs-type">double</span> w[N];<br><span class="hljs-type">int</span> n, m, S, T, cur[N], d[N];<br><br><span class="hljs-function">il <span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b, <span class="hljs-type">int</span> c)</span> </span>&#123;<br>    e[idx] = b, tw[idx] = c, ne[idx] = h[a], h[a] = idx++;<br>    e[idx] = a, tw[idx] = <span class="hljs-number">0</span>, ne[idx] = h[b], h[b] = idx++;<br>&#125;<br><br><span class="hljs-function">il <span class="hljs-type">bool</span> <span class="hljs-title">bfs</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-built_in">memset</span>(d, <span class="hljs-number">-1</span>, <span class="hljs-keyword">sizeof</span> d);<br>    queue&lt;<span class="hljs-type">int</span>&gt; q;<br>    q.<span class="hljs-built_in">push</span>(S), d[S] = <span class="hljs-number">0</span>, cur[S] = h[S];<br>    <span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>()) &#123;<br>        <span class="hljs-type">int</span> t = q.<span class="hljs-built_in">front</span>();<br>        q.<span class="hljs-built_in">pop</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = h[t]; ~i; i = ne[i]) &#123;<br>            <span class="hljs-type">int</span> j = e[i];<br>            <span class="hljs-keyword">if</span> (d[j] == <span class="hljs-number">-1</span> &amp;&amp; w[i]) &#123;<br>                d[j] = d[t] + <span class="hljs-number">1</span>;<br>                cur[j] = h[j];<br>                <span class="hljs-keyword">if</span> (j == T) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>                q.<span class="hljs-built_in">push</span>(j);<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">double</span> limit)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (u == T) <span class="hljs-keyword">return</span> limit;<br>    <span class="hljs-type">double</span> flow = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = cur[u]; ~i &amp;&amp; flow &lt; limit; i = ne[i]) &#123;<br>        cur[u] = i;<br>        <span class="hljs-type">int</span> ver = e[i];<br>        <span class="hljs-keyword">if</span> (d[ver] == d[u] + <span class="hljs-number">1</span> &amp;&amp; w[i] &gt; <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-type">double</span> t = <span class="hljs-built_in">find</span>(ver, <span class="hljs-built_in">min</span>(w[i], limit - flow)); <br>            <span class="hljs-keyword">if</span> (!t) d[ver] = <span class="hljs-number">-1</span>;<br>            w[i] -= t, w[i ^ <span class="hljs-number">1</span>] += t, flow += t;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (flow == <span class="hljs-number">0</span>)  d[u] = <span class="hljs-number">-1</span>;<br>    <span class="hljs-keyword">return</span> flow;<br>&#125;<br><br><span class="hljs-function">il <span class="hljs-type">double</span> <span class="hljs-title">dinic</span><span class="hljs-params">(<span class="hljs-type">double</span> mid)</span> </span>&#123;<br>    <span class="hljs-type">double</span> res = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; idx; i += <span class="hljs-number">2</span>)<br>        <span class="hljs-keyword">if</span> (tw[i] &lt;= mid) &#123;<br>            res += tw[i] - mid;      <span class="hljs-comment">// 此时边权 wi - mid &lt; 0，加上更优</span><br>            w[i] = w[i ^ <span class="hljs-number">1</span>] = <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-keyword">else</span>    w[i] = w[i ^ <span class="hljs-number">1</span>] = tw[i] - mid;<br>    <br>    <span class="hljs-type">double</span> r = <span class="hljs-number">0</span>, flow;<br>    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">bfs</span>()) &#123;<br>        <span class="hljs-keyword">while</span> (flow = <span class="hljs-built_in">find</span>(S, INF))<br>            r += flow;<br>    &#125;<br>    <span class="hljs-keyword">return</span> r + res;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld%lld%lld%lld&quot;</span>, &amp;n, &amp;m, &amp;S, &amp;T);<br>    <br>    <span class="hljs-built_in">memset</span>(h, <span class="hljs-number">-1</span>, <span class="hljs-keyword">sizeof</span> h);<br>    <span class="hljs-keyword">for</span> (re <span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i++) &#123;<br>        <span class="hljs-type">int</span> a, b, c;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld%lld%lld&quot;</span>, &amp;a, &amp;b, &amp;c);<br>        <span class="hljs-built_in">add</span>(a, b, c);	<span class="hljs-comment">// 此处存边权</span><br>    &#125;<br>	<br>    <span class="hljs-comment">// 二分</span><br>    <span class="hljs-type">double</span> l = <span class="hljs-number">0</span>, r = <span class="hljs-number">1e7</span>;<br>    <span class="hljs-keyword">while</span> (r - l &gt; eps) &#123;<br>        <span class="hljs-type">double</span> mid = (l + r) / <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">dinic</span>(mid) &lt; <span class="hljs-number">0</span>)	r = mid;<br>        <span class="hljs-keyword">else</span>	l = mid;<br>    &#125;<br><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.2lf\n&quot;</span>, r);<br>    <span class="hljs-keyword">return</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 </font>
-
 <br>
 
                 

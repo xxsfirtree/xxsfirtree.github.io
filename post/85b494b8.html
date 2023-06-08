@@ -276,33 +276,31 @@
               <div class="markdown-body">
                 
                 <font size="3">
-
 <meta name="referrer" content="no-referrer">
-
 <p>题目链接： <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2756">https://www.luogu.com.cn/problem/P2756</a></p>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>一共有 n 个飞行员，其中有 m 个外籍飞行员和 (n−m) 个英国飞行员</p>
+<h2 id="题目描述">题目描述</h2>
+<p>一共有 n 个飞行员，其中有 m 个外籍飞行员和 (n−m) 个英国飞行员</p>
 <p>外籍飞行员从 1 到 m 编号，英国飞行员从 m+1 到 n 编号</p>
-<p> 对于给定的外籍飞行员与英国飞行员的配合情况，找出最佳飞行员配对方案。</p>
+<p>对于给定的外籍飞行员与英国飞行员的配合情况，找出最佳飞行员配对方案。</p>
 <p><strong>一句话：</strong></p>
 <p><strong>m 个外籍和 n-m 个英国飞行员两两配对，问最大匹配数和匹配方案</strong></p>
 <br>
-
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><font size="4"> 
-
+<h2 id="分析">分析</h2>
+<font size="4"> 
 <p>很明显的二分图最大匹配模型。</p>
 </font>
-
 <p>对于二分图的最大匹配问题：</p>
 <ul>
-<li><p>匈牙利算法的时间复杂度是$O(nm)$</p>
+<li>
+<p>匈牙利算法的时间复杂度是$O(nm)$</p>
 </li>
-<li><p>Dinic算法的时间复杂度是$O(m\sqrt{n})$</p>
+<li>
+<p>Dinic算法的时间复杂度是$O(m\sqrt{n})$</p>
 </li>
 </ul>
 <p>匈牙利算法是每次只找一条增广路的最大流算法。</p>
 <p><strong>所以匈牙利算法本质上就是 EK算法</strong></p>
 <br>
-
 <p><strong>建图：</strong></p>
 <p>根据流网络的定义，先建立源点S和汇点T。</p>
 <ul>
@@ -314,19 +312,16 @@
 <p>所以任意一个可行流都是一个满足题意的解</p>
 <p>那么，整个流网络中的最大流便是最大匹配方案</p>
 <br>
-
-<h2 id="输出方案"><a href="#输出方案" class="headerlink" title="输出方案"></a>输出方案</h2><p>枚举所有左右两个集合之间的边，看哪条边的流量是满的</p>
+<h2 id="输出方案">输出方案</h2>
+<p>枚举所有左右两个集合之间的边，看哪条边的流量是满的</p>
 <p>流满则意味着这是一组可行的匹配</p>
 <p>有很多种处理的方式，下面是其中一种。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 枚举所有的正向边</span><br><span class="hljs-comment">// 因为存图时我们成对存储，所以偶数的边就是正向边</span><br><span class="hljs-keyword">for</span> (re <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; idx; i += <span class="hljs-number">2</span>) &#123;<br>    <span class="hljs-comment">// 两个端点</span><br>    <span class="hljs-type">int</span> v = e[i], u = e[i ^ <span class="hljs-number">1</span>];<br>    <span class="hljs-comment">// 如果两个端点分别在两个集合中 并且这条边的流量已满</span><br>    <span class="hljs-keyword">if</span> (v &gt; m &amp;&amp; v &lt;= n &amp;&amp; !w[i])<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld %lld\n&quot;</span>, u, v);	<span class="hljs-comment">// 输出方案</span><br>&#125;<br></code></pre></td></tr></table></figure>
-
 <br>
-
-<h2 id="code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><p><strong>完整的代码如下：</strong></p>
+<h2 id="code">Code</h2>
+<p><strong>完整的代码如下：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">500</span> + <span class="hljs-number">10</span>, M = <span class="hljs-number">6000</span> + <span class="hljs-number">10</span>, INF = <span class="hljs-number">0x3f3f3f3f</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> MOD = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>;<br><span class="hljs-type">int</span> e[M], ne[M], h[N], w[M], idx;<br><span class="hljs-type">int</span> n, m, S, T, cur[N], d[N];<br><br><span class="hljs-function">il <span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b, <span class="hljs-type">int</span> c)</span> </span>&#123;<br>    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx++;<br>    e[idx] = a, w[idx] = <span class="hljs-number">0</span>, ne[idx] = h[b], h[b] = idx++;<br>&#125;<br><br><span class="hljs-function">il <span class="hljs-type">bool</span> <span class="hljs-title">bfs</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-built_in">memset</span>(d, <span class="hljs-number">-1</span>, <span class="hljs-keyword">sizeof</span> d);<br>    queue&lt;<span class="hljs-type">int</span>&gt; q;<br>    q.<span class="hljs-built_in">push</span>(S), d[S] = <span class="hljs-number">0</span>, cur[S] = h[S];<br>    <span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>()) &#123;<br>        <span class="hljs-type">int</span> t = q.<span class="hljs-built_in">front</span>();<br>        q.<span class="hljs-built_in">pop</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = h[t]; ~i; i = ne[i]) &#123;<br>            <span class="hljs-type">int</span> j = e[i];<br>            <span class="hljs-keyword">if</span> (d[j] == <span class="hljs-number">-1</span> &amp;&amp; w[i]) &#123;<br>                d[j] = d[t] + <span class="hljs-number">1</span>;<br>                cur[j] = h[j];<br>                <span class="hljs-keyword">if</span> (j == T) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>                q.<span class="hljs-built_in">push</span>(j);<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> limit)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (u == T) <span class="hljs-keyword">return</span> limit;<br>    <span class="hljs-type">int</span> flow = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = cur[u]; ~i &amp;&amp; flow &lt; limit; i = ne[i]) &#123;<br>        cur[u] = i;<br>        <span class="hljs-type">int</span> ver = e[i];<br>        <span class="hljs-keyword">if</span> (d[ver] == d[u] + <span class="hljs-number">1</span> &amp;&amp; w[i]) &#123;<br>            <span class="hljs-type">int</span> t = <span class="hljs-built_in">find</span>(ver, <span class="hljs-built_in">min</span>(w[i], limit - flow)); <br>            <span class="hljs-keyword">if</span> (!t) d[ver] = <span class="hljs-number">-1</span>;<br>            w[i] -= t, w[i ^ <span class="hljs-number">1</span>] += t, flow += t;<br>        &#125; <br>    &#125;<br>    <span class="hljs-keyword">if</span> (flow == <span class="hljs-number">0</span>)  d[u] = <span class="hljs-number">-1</span>;<br>    <span class="hljs-keyword">return</span> flow;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">dinic</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-type">int</span> r = <span class="hljs-number">0</span>, flow;<br>    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">bfs</span>()) &#123;<br>        <span class="hljs-keyword">while</span> (flow = <span class="hljs-built_in">find</span>(S, INF))<br>            r += flow;<br>    &#125;<br>    <span class="hljs-keyword">return</span> r;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld%lld&quot;</span>, &amp;m, &amp;n);<br>    S = <span class="hljs-number">0</span>, T = n + <span class="hljs-number">1</span>;<br><br>    <span class="hljs-comment">// 建图</span><br>    <span class="hljs-built_in">memset</span>(h, <span class="hljs-number">-1</span>, <span class="hljs-built_in">sizeof</span>(h));<br>    <span class="hljs-keyword">for</span> (re <span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i++) <span class="hljs-built_in">add</span>(S, i, <span class="hljs-number">1</span>);<br>    <span class="hljs-keyword">for</span> (re <span class="hljs-type">int</span> i = m + <span class="hljs-number">1</span>; i &lt;= n; i++) <span class="hljs-built_in">add</span>(i, T, <span class="hljs-number">1</span>);<br>    <br>    <span class="hljs-type">int</span> a, b;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld%lld&quot;</span>, &amp;a, &amp;b), a != <span class="hljs-number">-1</span> &amp;&amp; b != <span class="hljs-number">-1</span>)<br>        <span class="hljs-built_in">add</span>(a, b, <span class="hljs-number">1</span>);<br>    <br>    <span class="hljs-comment">// 求最大流</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>, <span class="hljs-built_in">dinic</span>());<br><br>    <span class="hljs-comment">// 输出方案</span><br>    <span class="hljs-keyword">for</span> (re <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; idx; i += <span class="hljs-number">2</span>) &#123;<br>        <span class="hljs-type">int</span> v = e[i], u = e[i ^ <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">if</span> (v &gt; m &amp;&amp; v &lt;= n &amp;&amp; !w[i])<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld %lld\n&quot;</span>, u, v); <br>    &#125;<br>    <span class="hljs-keyword">return</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
 </font>
-
 <br>
 
                 
