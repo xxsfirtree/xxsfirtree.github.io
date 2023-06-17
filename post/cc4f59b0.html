@@ -279,37 +279,39 @@
               <div class="markdown-body">
                 
                 <font size="3">
+
 <meta name="referrer" content="no-referrer">
-<h2 id="代码块">代码块</h2>
-<p>在Java中，使用 { } 括起来的代码被称为代码块（Code block）</p>
+
+<h2 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h2><p>在Java中，使用 { } 括起来的代码被称为代码块（Code block）</p>
 <br>
+
 <p>又称作初始化块，属于类中的成员，不需要通过对象名或者类名显式调用，而是在加载类的时候，隐式的被调用。</p>
-<h3 id="分类">分类</h3>
-<p>根据其位置和声明的不同，可以分为：</p>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p>根据其位置和声明的不同，可以分为：</p>
 <ul>
 <li>普通（局部）代码块</li>
 <li>同步代码块</li>
 <li>静态代码块</li>
 <li>构造（实例）代码块</li>
 </ul>
-<h3 id="普通局部代码块">普通(局部)代码块</h3>
-<p>在类的方法体中出现，可以限定变量生命周期，及早释放，提高内存利用率</p>
+<h3 id="普通局部代码块"><a href="#普通-局部-代码块" class="headerlink" title="普通(局部)代码块"></a>普通(局部)代码块</h3><p>在类的方法体中出现，可以限定变量生命周期，及早释放，提高内存利用率</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test1</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-comment">// 局部代码块</span><br>        &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> <span class="hljs-number">100</span>;<br>        &#125;<br>        <span class="hljs-comment">// 局部代码块中声明的变量在代码块外部访问不到！</span><br>        <span class="hljs-comment">// System.out.println(n);</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <br>
-<h3 id="同步代码块">同步代码块</h3>
-<p>同步代码块指的是被Java中Synchronized关键词修饰的代码块</p>
+
+<h3 id="同步代码块"><a href="#同步代码块" class="headerlink" title="同步代码块"></a>同步代码块</h3><p>同步代码块指的是被Java中Synchronized关键词修饰的代码块</p>
 <p>在Java中，Synchronized关键词不仅仅可以用来修饰代码块，与此同时也可以用来修饰方法，是一种线程同步机制</p>
 <p>被Synchronized关键词修饰的代码块会被加上内置锁</p>
 <br>
-<h3 id="静态代码块">静态代码块</h3>
-<p>直接放在类下的代码块，由static修饰的就是静态代码块。</p>
+
+<h3 id="静态代码块"><a href="#静态代码块" class="headerlink" title="静态代码块"></a>静态代码块</h3><p>直接放在类下的代码块，由static修饰的就是静态代码块。</p>
 <p><strong><font color="#006eb1">静态代码块只能调用静态成员</font></strong></p>
 <br>
-<h4 id="静态代码块的形式">静态代码块的形式</h4>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> &#123;<br>    <span class="hljs-keyword">static</span> &#123;<br>        <span class="hljs-comment">// 内容</span><br>        System.out.println(<span class="hljs-string">&quot;执行静态代码块...&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="静态代码块的形式"><a href="#静态代码块的形式" class="headerlink" title="静态代码块的形式"></a>静态代码块的形式</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> &#123;<br>    <span class="hljs-keyword">static</span> &#123;<br>        <span class="hljs-comment">// 内容</span><br>        System.out.println(<span class="hljs-string">&quot;执行静态代码块...&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <br>
-<h4 id="调用时机">调用时机</h4>
-<p><font color="#006eb1">与类的加载一起执行，并且仅执行一次</font></p>
+
+<h4 id="调用时机"><a href="#调用时机" class="headerlink" title="调用时机"></a>调用时机</h4><p><font color="#006eb1">与类的加载一起执行，并且仅执行一次</font></p>
 <p><strong>那么，类在什么时候被加载？</strong></p>
 <ol>
 <li>创建对象实例时</li>
@@ -318,43 +320,47 @@
 </ol>
 <p><strong>如果一个类中有多个静态代码块，会按照书写顺序依次执行</strong></p>
 <br>
-<h3 id="构造代码块">构造代码块</h3>
-<p>直接放在类下的代码块，不加任何的修饰符</p>
+
+<h3 id="构造代码块"><a href="#构造代码块" class="headerlink" title="构造代码块"></a>构造代码块</h3><p>直接放在类下的代码块，不加任何的修饰符</p>
 <p><strong><font color="#006eb1">构造代码块可以调用任意成员</font></strong></p>
 <br>
-<h4 id="构造代码块的形式">构造代码块的形式</h4>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> &#123;<br>    &#123;<br>        <span class="hljs-comment">// 内容</span><br>        System.out.println(<span class="hljs-string">&quot;执行构造代码块...&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="构造代码块的形式"><a href="#构造代码块的形式" class="headerlink" title="构造代码块的形式"></a>构造代码块的形式</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> &#123;<br>    &#123;<br>        <span class="hljs-comment">// 内容</span><br>        System.out.println(<span class="hljs-string">&quot;执行构造代码块...&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <br>
-<h4 id="调用时机">调用时机</h4>
-<p>与对象初始化一起加载，每次调用构造方法（即创建对象）都会执行，<strong>且优先度高于构造方法</strong></p>
+
+<h4 id="调用时机"><a href="#调用时机-1" class="headerlink" title="调用时机"></a>调用时机</h4><p>与对象初始化一起加载，每次调用构造方法（即创建对象）都会执行，<strong>且优先度高于构造方法</strong></p>
 <p>我们可以把它理解为另一种构造器或者说是对构造器的补充。</p>
 <p>比如，当多个构造器都有相同的部分时，我们可以把相同的部分抽取到代码块中。</p>
 <br>
+
 <p>需要注意的是：</p>
 <p><strong>如果仅使用类的静态成员，构造代码块是不会执行的</strong></p>
 <p>因为构造代码块必须在创建对象时被调用，而使用类的静态成员并不需要创建对象</p>
 <br>
-<h2 id="执行顺序">执行顺序</h2>
-<p>根据是否加修饰符【static】可以把类下的代码块分为<strong>静态代码块和构造代码块</strong></p>
+
+<h2 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h2><p>根据是否加修饰符【static】可以把类下的代码块分为<strong>静态代码块和构造代码块</strong></p>
 <br>
+
 <p>在Java中</p>
 <p><font color="#006db0">静态代码块、构造代码块和构造函数的执行顺序是一个笔试的考点</font></p>
 <p>这篇文章主要就是来介绍它们之间的执行顺序</p>
-<h2 id="在单纯的一个类中">在单纯的一个类中</h2>
-<p><strong>创建一个对象时的调用顺序：</strong></p>
+<h2 id="在单纯的一个类中"><a href="#在单纯的一个类中" class="headerlink" title="在单纯的一个类中"></a>在单纯的一个类中</h2><p><strong>创建一个对象时的调用顺序：</strong></p>
 <ol>
 <li>调用静态代码块和静态属性初始化（优先级一样，存在多个时按定义顺序调用）</li>
 <li>调用构造代码块和普通属性初始化（优先级一样，存在多个时按定义顺序调用）</li>
 <li>调用构造方法（构造器）</li>
 </ol>
 <br>
+
 <p><strong>简而言之：</strong></p>
 <p><font color="#006db0">静态代码块 &gt; 构造代码块 &gt; 构造器</font></p>
 <p><strong>示例：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">test1_1</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">A</span> <span class="hljs-variable">test</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">A</span>();<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> &#123;<br>    <span class="hljs-comment">// 静态属性的初始化</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">num1</span> <span class="hljs-operator">=</span> getNum1();<br><br>    <span class="hljs-comment">// 静态代码块</span><br>    <span class="hljs-keyword">static</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;执行静态代码块1....&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">static</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;执行静态代码块2....&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-comment">// 普通属性的初始化</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">num2</span> <span class="hljs-operator">=</span> getNum2();<br><br>    <span class="hljs-comment">// 构造代码块</span><br>    &#123;<br>        System.out.println(<span class="hljs-string">&quot;执行构造代码块2....&quot;</span>);<br>    &#125;<br><br>    &#123;<br>        System.out.println(<span class="hljs-string">&quot;执行构造代码块1....&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">A</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;A() 构造器被调用...&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getNum1</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;执行静态属性的初始化....&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">100</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getNum2</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;执行普通属性的初始化....&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">200</span>;<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">程序的执行结果：</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">执行静态属性的初始化....</span><br><span class="hljs-comment">执行静态代码块1....</span><br><span class="hljs-comment">执行静态代码块2....</span><br><span class="hljs-comment">执行普通属性的初始化....</span><br><span class="hljs-comment">执行构造代码块2....</span><br><span class="hljs-comment">执行构造代码块1....</span><br><span class="hljs-comment">A() 构造器被调用...</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></table></figure>
+
 <br>
-<h2 id="在有继承关系的类中">在有继承关系的类中</h2>
-<p><strong>先不考虑静态构造器和静态属性初始化</strong></p>
+
+<h2 id="在有继承关系的类中"><a href="#在有继承关系的类中" class="headerlink" title="在有继承关系的类中"></a>在有继承关系的类中</h2><p><strong>先不考虑静态构造器和静态属性初始化</strong></p>
 <p>我们可以把子类的构造函数看作是</p>
 <ul>
 <li>supper()	– 调用父类的构造器</li>
@@ -363,7 +369,9 @@
 </ul>
 <p><strong>示例：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">test1_1</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">B</span> <span class="hljs-variable">test</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">B</span>();<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> &#123;<br><br>    &#123;<br>        System.out.println(<span class="hljs-string">&quot;执行父类的构造代码块....&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">A</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-built_in">super</span>();<br>        <span class="hljs-comment">// 调用构造代码块</span><br>        System.out.println(<span class="hljs-string">&quot;父类的 A() 构造器被调用....&quot;</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">A</span> &#123;<br><br>    &#123;<br>        System.out.println(<span class="hljs-string">&quot;执行子类的构造代码块....&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">B</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-built_in">super</span>();<br>        <span class="hljs-comment">// 调用构造代码块</span><br>        System.out.println(<span class="hljs-string">&quot;子类的 B() 构造器被调用...&quot;</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">程序的执行结果：</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">执行父类的构造代码块....</span><br><span class="hljs-comment">父类的 A() 构造器被调用....</span><br><span class="hljs-comment">执行子类的构造代码块....</span><br><span class="hljs-comment">子类的 B() 构造器被调用...</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></table></figure>
+
 <br>
+
 <p>如上规律是我们不考虑静态构造器和静态属性初始化</p>
 <p><strong>我们知道在创建一个对象时的步骤是：</strong></p>
 <ol>
@@ -373,6 +381,7 @@
 <p>所以我们就会先在加载类时执行静态代码块和静态属性初始化（先父类再子类）</p>
 <p><font color="#006eb1">因此静态构造器和静态属性初始化则总是最早发生</font></p>
 <br>
+
 <p>综上所述</p>
 <p><strong>创建一个带有继承关系的对象时的调用顺序：</strong></p>
 <ol>
@@ -384,24 +393,32 @@
 <li>子类的构造器</li>
 </ol>
 <br>
+
 <p><strong>简而言之：</strong></p>
 <p><font color="#006db0">父静态代码块 &gt; 子静态代码块 &gt; 父构造代码块 &gt; 父构造器 &gt; 子构造代码块 &gt; 子构造器</font></p>
 <p><strong>示例：</strong></p>
 <p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20221223134333437.png" srcset="/img/loading.gif" lazyload alt="image-20221223134333437"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/*</span><br><span class="hljs-comment">程序的执行结果：</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">执行父类的静态属性初始化....</span><br><span class="hljs-comment">执行父类的静态代码块....</span><br><span class="hljs-comment">执行子类的静态属性初始化....</span><br><span class="hljs-comment">执行子类的静态代码块....</span><br><span class="hljs-comment">执行父类的普通属性初始化....</span><br><span class="hljs-comment">执行父类的构造代码块....</span><br><span class="hljs-comment">父类的 A() 构造器被调用....</span><br><span class="hljs-comment">执行子类的普通属性初始化....</span><br><span class="hljs-comment">执行子类的构造代码块....</span><br><span class="hljs-comment">子类的 B() 构造器被调用...</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></table></figure>
+
 <br>
+
 <p><strong>需要注意的是，因为类仅加载一次</strong></p>
 <p><strong><font color="#0089cf">所以当第二次创建该类的对象时，第1 - 2步（即静态代码块和静态属性初始化）就不再进行</font></strong></p>
 <p>如下面的示例，第二次创建的tmp对象就不再执行静态代码块和静态属性初始化</p>
 <br>
+
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 若上图的主方法改为</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">test1_1</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">B</span> <span class="hljs-variable">test</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">B</span>();<br>        System.out.println(<span class="hljs-string">&quot;===============================&quot;</span>);<br>        <span class="hljs-type">B</span> <span class="hljs-variable">tmp</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">B</span>();<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">程序的执行结果：</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">执行父类的静态属性初始化....</span><br><span class="hljs-comment">执行父类的静态代码块....</span><br><span class="hljs-comment">执行子类的静态属性初始化....</span><br><span class="hljs-comment">执行子类的静态代码块....</span><br><span class="hljs-comment">执行父类的普通属性初始化....</span><br><span class="hljs-comment">执行父类的构造代码块....</span><br><span class="hljs-comment">父类的 A() 构造器被调用....</span><br><span class="hljs-comment">执行子类的普通属性初始化....</span><br><span class="hljs-comment">执行子类的构造代码块....</span><br><span class="hljs-comment">子类的 B() 构造器被调用...</span><br><span class="hljs-comment">===============================</span><br><span class="hljs-comment">执行父类的普通属性初始化....</span><br><span class="hljs-comment">执行父类的构造代码块....</span><br><span class="hljs-comment">父类的 A() 构造器被调用....</span><br><span class="hljs-comment">执行子类的普通属性初始化....</span><br><span class="hljs-comment">执行子类的构造代码块....</span><br><span class="hljs-comment">子类的 B() 构造器被调用...</span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></table></figure>
+
 <br>
-<h2 id="例题">例题</h2>
-<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20221223142852604.png" srcset="/img/loading.gif" lazyload alt="image-20221223142852604"></p>
+
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20221223142852604.png" srcset="/img/loading.gif" lazyload alt="image-20221223142852604"></p>
 <br>
+
 <p>输出的结果应该是：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">静态成员sam初始化<br><span class="hljs-keyword">static</span>块被执行<br>sam1成员初始化<br>test1_1的默认无参构造器被调用<br></code></pre></td></tr></table></figure>
+
 </font>
+
 <br>
 
                 
