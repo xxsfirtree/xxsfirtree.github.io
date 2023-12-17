@@ -1,0 +1,1299 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="firtree">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="JSP、EL、JSTL、MVC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JSP">
+<meta property="og:url" content="http://example.com/post/78b18e67.html">
+<meta property="og:site_name" content="firtree">
+<meta property="og:description" content="JSP、EL、JSTL、MVC">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20230902142028954.png">
+<meta property="article:published_time" content="2023-08-30T09:09:07.000Z">
+<meta property="article:modified_time" content="2023-09-03T10:58:49.917Z">
+<meta property="article:author" content="firtree">
+<meta property="article:tag" content="JSP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20230902142028954.png">
+  
+  
+  
+  <title>JSP - firtree</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Firtree</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>archive</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>category</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>tag</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>about</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/photos/033.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="JSP"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-08-30 17:09" pubdate>
+          2023年8月30日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          14k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          115 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JSP</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <font size="3">
+
+<meta name="referrer" content="no-referrer">
+
+<h1 id="jsp"><a href="#JSP" class="headerlink" title="JSP"></a>JSP</h1><p>JSP 是一种动态网页技术，主要的作用是 替代 servlet 程序 回传 HTML 页面</p>
+<p>JSP 页面主要是由 HTML 和 JSP 代码组成的，JSP 代码通过 <code>&lt;% %&gt;</code> 加入到 HTML 代码中</p>
+<p>本质上，jsp 就是一个 servlet 程序</p>
+<br>
+
+<h2 id="jsp-基本元素"><a href="#JSP-基本元素" class="headerlink" title="JSP 基本元素"></a>JSP 基本元素</h2><h3 id="jsp-脚本元素"><a href="#JSP-脚本元素" class="headerlink" title="JSP 脚本元素"></a>JSP 脚本元素</h3><p>JSP 脚本元素包括 JSP 声明、JSP 表达式、JSP 代码块，在页面初始化时被初始化</p>
+<p><strong>JSP 声明</strong></p>
+<p><code>&lt;%! 声明变量、方法、类 %&gt;</code></p>
+<p>可以只声明变量，也可以在声明的同时提供初始值</p>
+<br>
+
+<p><strong>JSP 表达式脚本</strong></p>
+<p><code>&lt;%=表达式%&gt;</code></p>
+<p>是由变量、常量组成的算式，将数值转化为字符串嵌入 html 页面，并直接输出</p>
+<p>注意事项：</p>
+<ul>
+<li>不能用分号结尾 </li>
+<li>标签内部不能有空格</li>
+<li>表达式脚本都会被翻译成为 out.print() 输出到页面上</li>
+<li>表达式脚本会被翻译到 _jspService() 方法中，所以该方法中的对象（request, response）都可以直接调用</li>
+</ul>
+<br>
+
+<p><strong>JSP 代码块</strong></p>
+<p><code>&lt;% 符合 Java 语法的代码块 %&gt;</code></p>
+<p>代码块脚本也会被翻译到 _jspService() 方法中，所以该方法中的对象（request, response）也可以直接调用</p>
+<p>代码脚本也可以跟表达式脚本一起组合使用 </p>
+<br>
+
+<h4 id="jsp-指令元素"><a href="#JSP-指令元素" class="headerlink" title="JSP 指令元素"></a>JSP 指令元素</h4><p>JSP 指令的语法格式：</p>
+<p><code>&lt;% 指令名称 属性1=&quot;属性值1&quot; 属性2=&quot;属性值2&quot; ... %&gt;</code></p>
+<br>
+
+<p>JSP 指令包括：page 指令、include 指令和 taglib 指令</p>
+<ul>
+<li>page 指令：定义整个页面的全局属性</li>
+<li>include 指令：用于包含一个文本或代码的文件</li>
+<li>taglib 指令：用来引用自定义的标签或第三方标签库</li>
+</ul>
+<br>
+
+<h4 id="page-指令"><a href="#page-指令" class="headerlink" title="page 指令"></a>page 指令</h4><p>用来定义 jsp 页面中的全局属性，描述了与页面相关的一些信息</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>language</td>
+<td>指定用到的脚本语言，默认是 java</td>
+</tr>
+<tr>
+<td>import</td>
+<td>用于导入 Java包和 Java 类</td>
+</tr>
+<tr>
+<td>pageEncoding</td>
+<td>指定页面所用编码</td>
+</tr>
+</tbody></table>
+<p>注意事项：</p>
+<ol>
+<li>在每个页面中可以使用多个 <code>&lt;%@ page %&gt;</code>指令，分别描述不同的属性</li>
+<li>除了 import，每个属性仅能使用一次</li>
+<li>区分大小写</li>
+</ol>
+<br>
+
+<h4 id="include-指令"><a href="#include-指令" class="headerlink" title="include 指令"></a>include 指令</h4><p>称为文件加载指令，将其他的文件插入 JSP 页面，被插入的文件必须保证插入后形成的新文件符合 JSP 页面的语法规则</p>
+<p><code>&lt;%@ include file=&quot;&quot; %&gt;</code></p>
+<p>file 属性指定你要包含的 jsp 页面的路径，地址中第一个斜杠 &#x2F; 表示为 <a href="http://ip:port/工程路径/，映射到代码的">http://ip:port/工程路径/，映射到代码的</a> web 目录</p>
+<ol>
+<li>静态包含不会翻译被包含的 jsp 页面</li>
+<li>静态包含其实是把被包含的 jsp 页面的代码拷贝到包含的位置执行输出</li>
+</ol>
+<br>
+
+<h3 id="jsp-动作元素"><a href="#JSP-动作元素" class="headerlink" title="JSP 动作元素"></a>JSP 动作元素</h3><p>用来控制 JSP 引擎的行为，主要有以下六个动作元素</p>
+<ul>
+<li><code>&lt;jsp:include&gt;</code>：在页面得到请求时动态包含另一个网页</li>
+<li><code>&lt;jsp:forward&gt;</code>：转向</li>
+<li><code>&lt;jsp:plugin&gt;</code>：连接客户端的 Applet 或者 Bean 组件</li>
+<li><code>&lt;jsp:useBean&gt;</code>：应用 JavaBean 组件</li>
+<li><code>&lt;jsp:serProperty&gt;</code>：设置 JavaBean 的属性值</li>
+<li><code>&lt;jsp:getProperty&gt;</code>：获取 JavaBean 的属性值并输出</li>
+</ul>
+<br>
+
+<h4 id="jspinclude"><a href="#jsp-include" class="headerlink" title="jsp:include"></a>jsp:include</h4><p><code>&lt;jsp:include page=&quot;&quot; /&gt;</code></p>
+<p>动态包含另一个页面</p>
+<ul>
+<li>当前页面和被包含的页面是各自独立被翻译的</li>
+<li>当执行到该动作标签时，才加载执行被包含文件</li>
+</ul>
+<br>
+
+<h4 id="jspforward"><a href="#jsp-forward" class="headerlink" title="jsp:forward"></a>jsp:forward</h4><p><code>&lt;jsp:forward page=&quot;&quot; /&gt;</code></p>
+<p>页面的转向：停止当前页面的执行，转向另一个页面，浏览器的地址栏不会跳转</p>
+<br>
+
+<h4 id="jspparam"><a href="#jsp-param" class="headerlink" title="jsp:param"></a>jsp:param</h4><p>param不能单独使用，而是作为 jsp:include 或 jsp:forward 的子标签使用，用于传递数据</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:include page=<span class="hljs-string">&quot;&quot;</span>&gt;<br>	&lt;jsp:param name=<span class="hljs-string">&quot;变量名1&quot;</span> value=<span class="hljs-string">&quot;变量值1&quot;</span> /&gt;<br>	&lt;jsp:param name=<span class="hljs-string">&quot;变量名2&quot;</span> value=<span class="hljs-string">&quot;变量值2&quot;</span> /&gt;<br>	...<br>&lt;/jsp:include&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>（1）html 注释</p>
+<p><code>&lt;!-- 注释 --&gt;</code></p>
+<p>html 注释会被翻译到 java 源代码中。在 _ jspService 方法里，以 out.writer 输出到客户端</p>
+<br>
+
+<p>（2）Java 注释</p>
+<p><code>&lt;%  // 注释  %&gt;</code></p>
+<p>java 注释会被翻译到 java 源代码中</p>
+<br>
+
+<p>（3）jsp 注释</p>
+<p><code>&lt;%-- 注释 --&gt;</code></p>
+<p>jsp 注释可以注掉 jsp 页面中所有代码</p>
+<br>
+
+<h2 id="jsp-内置对象"><a href="#JSP-内置对象" class="headerlink" title="JSP 内置对象"></a>JSP 内置对象</h2><p>九大内置对象</p>
+<table>
+<thead>
+<tr>
+<th>对象名称</th>
+<th>有效范围</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>application</td>
+<td>application</td>
+<td>表示应用程序上下文</td>
+</tr>
+<tr>
+<td>config</td>
+<td>page</td>
+<td>允许将初始化数据传递给一个 jsp 页面</td>
+</tr>
+<tr>
+<td>exception</td>
+<td>page</td>
+<td>异常处理</td>
+</tr>
+<tr>
+<td>out</td>
+<td>page</td>
+<td>提供对输出流的访问</td>
+</tr>
+<tr>
+<td>page</td>
+<td>page</td>
+<td>代表 jsp 页面对应的 Servlet 类实例</td>
+</tr>
+<tr>
+<td>pageContext</td>
+<td>page</td>
+<td>是 jsp 页面本身的上下文</td>
+</tr>
+<tr>
+<td>request</td>
+<td>request</td>
+<td>提供对请求数据的访问</td>
+</tr>
+<tr>
+<td>response</td>
+<td>page</td>
+<td>用来向客户端输入数据</td>
+</tr>
+<tr>
+<td>session</td>
+<td>session</td>
+<td>用来保存在服务器端与一个客户端之间需要保存的数据，当客户端关闭所有网页时自动消失</td>
+</tr>
+</tbody></table>
+<br>
+
+<p><strong>内置对象的作用域</strong></p>
+<table>
+<thead>
+<tr>
+<th>作用域</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>page</td>
+<td>当前 jsp 页面范围内有效</td>
+</tr>
+<tr>
+<td>request</td>
+<td>一次请求内有效</td>
+</tr>
+<tr>
+<td>session</td>
+<td>一个会话范围内有效</td>
+</tr>
+<tr>
+<td>application</td>
+<td>整个 web 工程范围内都有效</td>
+</tr>
+</tbody></table>
+<h2 id="response-和-out-的输出"><a href="#response-和-out-的输出" class="headerlink" title="response 和 out 的输出"></a>response 和 out 的输出</h2><p>response.write() 和 out.write() 都会输出内容到客户端</p>
+<p>但是以下代码会先输出 “response” 再输出 “out”</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%<br>    out.write(<span class="hljs-string">&quot;out&quot;</span>);<br>    response.getWriter().write(<span class="hljs-string">&quot;response&quot;</span>);<br>%&gt;<br></code></pre></td></tr></table></figure>
+
+<p>原因是，当 jsp 页面中所有代码执行完成后会做以下两个操作：</p>
+<ol>
+<li>执行 out.flush() 操作，会把 out 缓冲区中的数据追加写入到 response 缓冲区末尾</li>
+<li>会执行 response 的刷新操作，把全部数据写给客户端</li>
+</ol>
+<p><strong>由于 jsp 翻译后，底层源码都是使用 out 来进行输出，所以我们在 jsp 页面一般统一使用 out，避免打乱页面输出顺序</strong></p>
+<ul>
+<li>out.write() 输出字符串没有问题，但是输出数值时，会直接转为字符导致错误</li>
+<li>out.print() 输出任意数据都没有问题（都转换成为字符串后调用的 write 输出）</li>
+</ul>
+<p><strong>综上，在 jsp 页面中，可以统一使用 out.print() 来进行输出</strong></p>
+<br>
+
+<h2 id="response-的重定向"><a href="#response-的重定向" class="headerlink" title="response 的重定向"></a>response 的重定向</h2><p><code>response.sendRedirect(&quot;xxx.jsp&quot;)</code></p>
+<p>具体的规则和 servlet 中一样</p>
+<br>
+
+<h2 id="listener-监听器"><a href="#Listener-监听器" class="headerlink" title="Listener 监听器"></a>Listener 监听器</h2><p>JavaWeb 的三大组件之一，是 JavaEE 的规范（接口）</p>
+<p>监听器的作用是，监听某种事物的变化。然后通过回调函数，反馈给客户（程序）去做一些相应的处理</p>
+<p>目前只有 <strong>ServletContextListener</strong> 监听器仍在使用</p>
+<br>
+
+<ul>
+<li>ServletContextListener 可以监听 ServletContext 对象的创建和销毁</li>
+<li>ServletContext 对象在 web 工程启动的时候创建，在 web 工程停止的时候销毁</li>
+</ul>
+<br>
+
+<p>使用步骤：</p>
+<ol>
+<li>编写一个类实现 ServletContextListener 接口</li>
+<li>实现两个回调方法</li>
+<li>到 web.xml 中配置相关信息</li>
+</ol>
+<p><strong>MyServletContextListenerImpl.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyServletContextListenerImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ServletContextListener</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">contextInitialized</span><span class="hljs-params">(ServletContextEvent servletContextEvent)</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;ServletContextListener 对象被创建了&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">contextDestroyed</span><span class="hljs-params">(ServletContextEvent servletContextEvent)</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;ServletContextListener 对象被销毁了&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>web.xml</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">listener</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">listener-class</span>&gt;</span>com.firtree.listener.MyServletContextListenerImpl<span class="hljs-tag">&lt;/<span class="hljs-name">listener-class</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">listener</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="请求转发的流程"><a href="#请求转发的流程" class="headerlink" title="请求转发的流程"></a>请求转发的流程</h2><ol>
+<li>客户端获取关键字，然后传给 Servlet 程序</li>
+<li>servlet 的功能<ol>
+<li>获取请求的参数</li>
+<li>业务处理</li>
+<li>将数据信息保存到 request 对象中，然后请求转发</li>
+</ol>
+</li>
+<li>jsp 则专门用来显示数据信息<ol>
+<li>从 request 中获取数据信息</li>
+<li>输出可用信到客户端，显示</li>
+</ol>
+</li>
+</ol>
+<br>
+
+<h1 id="el-表达式"><a href="#EL-表达式" class="headerlink" title="EL 表达式"></a>EL 表达式</h1><p>EL 表达式的全称是：Expression Language，是表达式语言</p>
+<p>作用：主要是代替 jsp 页面中的表达式脚本在 jsp 页面中进行数据的输出，因为简洁</p>
+<br>
+
+<p><strong>表达式脚本输出空值时是 null，而 EL 表达式输出的是空字符串</strong></p>
+<p>基本语法：<code>$&#123; 表达式 &#125;</code></p>
+<br>
+
+<p>若不指定查找范围，则依次在 page、request、session、application 范围中查找（从小到大）</p>
+<p>EL 在输出属性值时，会自动的寻找该属性的get 方法，若没有 get 方法则会产生错误</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%=request.getScheme()%&gt;<br>$&#123; pageContext.request.scheme &#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>以上两种写法相同</strong></p>
+<br>
+
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><p>算数运算符和逻辑运算符同 java，比较特殊的有</p>
+<p><strong>empty 运算符</strong></p>
+<p>可以判断一个数据是否为空，以下几种情况为空：</p>
+<ol>
+<li>值为 null 值的时候，为空</li>
+<li>值为空串的时候，为空</li>
+<li>值是 Object 类型数组，长度为零的时候，为空</li>
+<li>集合，元素个数为零的时候，为空</li>
+</ol>
+<br>
+
+<p><strong>. 运算和 [] 运算</strong></p>
+<p><code>$&#123;name, property&#125; 或 $&#123;name[&quot;property&quot;]&#125;</code></p>
+<ul>
+<li>[] 主要用于访问数组、列表或其他集合对象的属性</li>
+<li>. 主要用于访问对象的属性</li>
+<li>[] 和 . 在访问对象属性时可以通用，但当属性名中有特殊字符（, - +）时需要用[]，且要加引号 [“xxx”]</li>
+</ul>
+<br>
+
+<h2 id="el-内部对象"><a href="#EL-内部对象" class="headerlink" title="EL 内部对象"></a>EL 内部对象</h2><p>EL 提供了 11 个可直接使用的内部对象</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>对象</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JSP</td>
+<td>pageContext</td>
+<td>获取当前 jsp 页面的信息</td>
+</tr>
+<tr>
+<td>作用域</td>
+<td>pageScope</td>
+<td>获取页面（page）范围的属性的值</td>
+</tr>
+<tr>
+<td>&#x2F;</td>
+<td>requestScope</td>
+<td>获取请求（request）范围的属性的值</td>
+</tr>
+<tr>
+<td>&#x2F;</td>
+<td>sessionScope</td>
+<td>获取会话（session）范围的属性的值</td>
+</tr>
+<tr>
+<td>&#x2F;</td>
+<td>applicationScope</td>
+<td>获取应用（application）范围的属性的值</td>
+</tr>
+<tr>
+<td>请求参数</td>
+<td>param</td>
+<td>获取单个指定请求参数的值</td>
+</tr>
+<tr>
+<td>&#x2F;</td>
+<td>paramValues</td>
+<td>获取请求参数的所有的值数组</td>
+</tr>
+<tr>
+<td>请求头</td>
+<td>header</td>
+<td>获取单个指定请求头信息的值</td>
+</tr>
+<tr>
+<td>&#x2F;</td>
+<td>headerValues</td>
+<td>获取请求头信息的所有的值数组</td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>cookie</td>
+<td>获取 request 中的 cookie 集</td>
+</tr>
+<tr>
+<td>初始化参数</td>
+<td>initParam</td>
+<td>获取初始化参数信息</td>
+</tr>
+</tbody></table>
+<br>
+
+<h2 id="el-对表单数据的访问"><a href="#EL-对表单数据的访问" class="headerlink" title="EL 对表单数据的访问"></a>EL 对表单数据的访问</h2><p>（1）提交信息页面</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;doSubmit.jsp&quot;</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&quot;get&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;name&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;hobby&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;music&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;hobby&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;basketball&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;hobby&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;swimming&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>（2）doSubmit.jsp</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;body&gt;<br>    姓名：$&#123;param.name&#125; &lt;br&gt;<br>    爱好：$&#123;paramValues.hobby[<span class="hljs-number">0</span>]&#125; $&#123;paramValues.hobby[<span class="hljs-number">1</span>]&#125; $&#123;paramValues.hobby[<span class="hljs-number">2</span>]&#125;<br>&lt;/body&gt;<br></code></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="el-对作用域内属性的访问"><a href="#EL-对作用域内属性的访问" class="headerlink" title="EL 对作用域内属性的访问"></a>EL 对作用域内属性的访问</h2><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;body&gt;<br>    &lt;%<br>      pageContext.setAttribute(<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;page&quot;</span>);<br>      request.setAttribute(<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;request&quot;</span>);<br>      session.setAttribute(<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;session&quot;</span>);<br>      application.setAttribute(<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;application&quot;</span>);<br>    %&gt;<br><br>    &lt;br&gt; &lt;br&gt;<br>    页面范围 a 值：$&#123; pageScope.a &#125; &lt;br&gt;<br>    请求范围 a 值：$&#123; requestScope.a &#125; &lt;br&gt;<br>    会话范围 a 值：$&#123; sessionScope.a &#125; &lt;br&gt;<br>    应用范围 a 值：$&#123; applicationScope.a &#125; &lt;br&gt;<br>&lt;/body&gt;<br></code></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="el-对-web-工程初始参数的访问"><a href="#EL-对-web-工程初始参数的访问" class="headerlink" title="EL 对 web 工程初始参数的访问"></a>EL 对 web 工程初始参数的访问</h2><p>（1）web.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">context-param</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">param-name</span>&gt;</span>book<span class="hljs-tag">&lt;/<span class="hljs-name">param-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">param-value</span>&gt;</span>JAVA<span class="hljs-tag">&lt;/<span class="hljs-name">param-value</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">context-param</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>（2）initParam.jsp</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%--  以下两种写法输出同样的结果  --%&gt;<br>&lt;%=application.getInitParameter(<span class="hljs-string">&quot;book&quot;</span>)%&gt; &lt;br&gt;<br>$&#123; initParam.book &#125;<br></code></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="el-对-javabean-的访问"><a href="#EL-对-JavaBean-的访问" class="headerlink" title="EL 对 JavaBean 的访问"></a>EL 对 JavaBean 的访问</h2><p><code>$&#123;name.property&#125;</code></p>
+<p>表示查找指定名称的作用域变量，并输出指定的 JavaBean 的属性值</p>
+<p>PS：寻找的属性必须有 get 方法，否则会有错误</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:useBean id=<span class="hljs-string">&quot;BookBean&quot;</span> class=<span class="hljs-string">&quot;com.firtree.POJO.BookBean&quot;</span> scope=<span class="hljs-string">&quot;session&quot;</span> /&gt;<br><br>$&#123; BookBean.bookId &#125; &lt;br&gt;<br>$&#123; BookBean.bookName &#125;<br></code></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="jstl"><a href="#JSTL" class="headerlink" title="JSTL"></a>JSTL</h1><p>是 JSP 标准标签库，可以提高开发效率，减少 JSP 页面中的代码数量</p>
+<p>EL 主要是为了替代 表达式脚本，JSTL 主要是为了替代 代码脚本</p>
+<table>
+<thead>
+<tr>
+<th>功能类型</th>
+<th>URI</th>
+<th>prefix</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>核心库</td>
+<td><a target="_blank" rel="noopener" href="http://java.sun.com/jsp/jstl/core">http://java.sun.com/jsp/jstl/core</a></td>
+<td>c</td>
+<td>操作范围变量、流程控制、URL 生成和操作</td>
+</tr>
+<tr>
+<td>函数</td>
+<td><a target="_blank" rel="noopener" href="http://java.sun.com/jsp/jstl/functions">http://java.sun.com/jsp/jstl/functions</a></td>
+<td>fn</td>
+<td>字符串处理函数</td>
+</tr>
+<tr>
+<td>格式化</td>
+<td><a target="_blank" rel="noopener" href="http://java.sun.com/jsp/jstl/fmt">http://java.sun.com/jsp/jstl/fmt</a></td>
+<td>fmt</td>
+<td>数字及日期数据格式化</td>
+</tr>
+<tr>
+<td>数据库存取（不用）</td>
+<td><a target="_blank" rel="noopener" href="http://java.sun.com/jsp/jstl/sql">http://java.sun.com/jsp/jstl/sql</a></td>
+<td>sql</td>
+<td>操作关系数据库</td>
+</tr>
+<tr>
+<td>XML 处理（不用）</td>
+<td><a target="_blank" rel="noopener" href="http://java.sun.com/jsp/jstl/xml">http://java.sun.com/jsp/jstl/xml</a></td>
+<td>x</td>
+<td>操作通过 XML 表示的数据</td>
+</tr>
+</tbody></table>
+<br>
+
+<p><strong>在 web 中使用 jstl 的步骤如下：</strong></p>
+<ol>
+<li>导入 Jar 包</li>
+<li>在 JSP 页面中添加 taglib 指令<code>&lt;%@ taglib prefix=&quot;&quot; url=&quot;&quot; %&gt;</code></li>
+<li>在页面中使用标签 <code>&lt;c:out value=&quot;$&#123;1+2&#125;&quot; /&gt;</code></li>
+</ol>
+<p>PS：JSTL 通常和 EL 表达式结合使用，EL 作为 JSTL 标签的属性值</p>
+<br>
+
+<h2 id="常用的-jstl-标签"><a href="#常用的-JSTL-标签" class="headerlink" title="常用的 JSTL 标签"></a>常用的 JSTL 标签</h2><h3 id="ltcoutgt"><a href="#lt-c-out-gt" class="headerlink" title="&lt;c:out&gt;"></a>&lt;c:out&gt;</h3><p>用于在 JSP 页面中显示数据</p>
+<p><code>&lt;c:out value=&quot;$&#123; user.userName &#125;&quot; default=&quot;默认值&quot; /&gt;</code></p>
+<br>
+
+<h3 id="ltcsetgt"><a href="#lt-c-set-gt" class="headerlink" title="&lt;c:set&gt;"></a>&lt;c:set&gt;</h3><p><code>&lt;c:set target=&quot;&quot; value=&quot;&quot; var=&quot;&quot; property=&quot;&quot; /&gt;</code>用于保存数据</p>
+<p>eg. 将 test.testinfo 的值保存到 session 的 test2 中，其中 test 是一个 JavaBean 实例</p>
+<p><code>&lt;c:set value=&quot;$&#123;test.testinfo&#125;&quot; var=&quot;test2&quot; scope=&quot;session&quot; /&gt; </code></p>
+<p>将对象 cust.address 的 city 属性保存到变量 city 中</p>
+<p><code>&lt;c:out target=&quot;$&#123;cust.address&#125;&quot; value=&quot;&#123;city&#125;&quot; property=&quot;city&quot; /&gt;</code></p>
+<p>注意事项：</p>
+<ul>
+<li>value  –  要保存的信息，可以是 EL 表达式或者常量</li>
+<li>target  –  需要修改属性的变量名，一般是 JavaBean 实例</li>
+<li>property  –  需要修改的 JavaBean 属性</li>
+<li>var  –  需要保存信息的变量</li>
+<li>scope  –  保存信息的变量范围</li>
+</ul>
+<p>**若指定了 target ，则必须指定 property  **</p>
+<br>
+
+<h3 id="ltcremovegt"><a href="#lt-c-remove-gt" class="headerlink" title="&lt;c:remove&gt;"></a>&lt;c:remove&gt;</h3><p><code>&lt;c:remove var=&quot;&quot; scope=&quot;&quot; /&gt;</code> 用于删除数据</p>
+<ul>
+<li>var  – 要删除的变量</li>
+<li>scope  –  被删除变量的范围</li>
+</ul>
+<br>
+
+<h3 id="ltcifgt"><a href="#lt-c-if-gt" class="headerlink" title="&lt;c:if&gt;"></a>&lt;c:if&gt;</h3><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;c:<span class="hljs-keyword">if</span> test=<span class="hljs-string">&quot;test-condition&quot;</span>&gt;<br>    业务处理<br>&lt;/c:<span class="hljs-keyword">if</span>&gt;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>test  –  表示需要判断的条件</li>
+<li>var  –  表示保存条件结果的变量名</li>
+<li>scope  –  保存条件结果的变量范围</li>
+</ul>
+<br>
+
+<h3 id="ltcchoosegt"><a href="#lt-c-choose-gt" class="headerlink" title="&lt;c:choose&gt;"></a>&lt;c:choose&gt;</h3><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;c:choose&gt;<br>    &lt;c:when test=<span class="hljs-string">&quot;condition1&quot;</span>&gt;<br>		处理业务<br>    &lt;/c:when&gt;<br>    &lt;c:otherwise&gt;<br>		处理业务<br>    &lt;/c:otherwise&gt;<br>&lt;/c:choose&gt;<br></code></pre></td></tr></table></figure>
+
+<ol>
+<li>标签里不能使用 html 注释，要使用 jsp 注释</li>
+<li>when 标签的父标签一定要是 choose 标签</li>
+</ol>
+<br>
+
+<h3 id="ltcforeachgt"><a href="#lt-c-forEach-gt" class="headerlink" title="&lt;c:forEach&gt;"></a>&lt;c:forEach&gt;</h3><p>（1）通过索引遍历</p>
+<p><code>&lt;c:forEach begin=&quot;&quot; end=&quot;&quot; var=&quot;&quot; step=&quot;&quot;&gt;&lt;/c:forEach&gt;</code></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;c:forEach <span class="hljs-keyword">var</span>=<span class="hljs-string">&quot;i&quot;</span> begin=<span class="hljs-string">&quot;1&quot;</span> end=<span class="hljs-string">&quot;10&quot;</span> step=<span class="hljs-string">&quot;2&quot;</span>&gt;<br>    $&#123;i&#125; &lt;br&gt;<br>&lt;/c:forEach&gt;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>begin  –  表示开始的索引</li>
+<li>end  –  表示结束的索引</li>
+<li>var  –  表示循环的变量</li>
+<li>step  –  表示循环步长</li>
+</ul>
+<br>
+
+<p>（2）遍历 Object 数组</p>
+<p><code>&lt;c:forEach items=&quot;&quot; var=&quot;&quot;&gt;&lt;/c:forEach&gt;</code></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%<br>    request.setAttribute(<span class="hljs-string">&quot;arr&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[]&#123;<span class="hljs-string">&quot;hello&quot;</span>, <span class="hljs-string">&quot;byebye&quot;</span>, <span class="hljs-string">&quot;hehe&quot;</span>&#125;);<br>%&gt;<br><br>&lt;c:forEach items=<span class="hljs-string">&quot;$&#123; requestScope.arr &#125;&quot;</span> <span class="hljs-keyword">var</span>=<span class="hljs-string">&quot;item&quot;</span>&gt;<br>    $&#123; item &#125; &lt;br&gt;<br>&lt;/c:forEach&gt;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>items  –  表示遍历的集合</li>
+<li>var  – 表示当前遍历到的数据</li>
+</ul>
+<p><strong>类似于 for (Object item : items)</strong></p>
+<br>
+
+<p>（3）遍历集合</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%<br>    HashMap&lt;String, Object&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, Object&gt;();<br>    map.put(<span class="hljs-string">&quot;aaa&quot;</span>, <span class="hljs-number">1111</span>);<br>    map.put(<span class="hljs-string">&quot;bbb&quot;</span>, <span class="hljs-number">2222</span>);<br>    map.put(<span class="hljs-string">&quot;ccc&quot;</span>, <span class="hljs-number">3333</span>);<br>    request.setAttribute(<span class="hljs-string">&quot;map&quot;</span>, map);<br>%&gt;<br>&lt;c:forEach <span class="hljs-keyword">var</span>=<span class="hljs-string">&quot;item&quot;</span> items=<span class="hljs-string">&quot;$&#123; requestScope.map &#125;&quot;</span>&gt;<br>    $&#123; item &#125; --- $&#123; item.key &#125; --- $&#123; item.value &#125; &lt;br&gt;<br>&lt;/c:forEach&gt;<br><br><br>&lt;%<br>    ArrayList&lt;BookBean&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>    list.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">BookBean</span>(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;book1&quot;</span>));<br>    list.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">BookBean</span>(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;book2&quot;</span>));<br>    request.setAttribute(<span class="hljs-string">&quot;list&quot;</span>, list);<br>%&gt;<br>&lt;c:forEach <span class="hljs-keyword">var</span>=<span class="hljs-string">&quot;item&quot;</span> items=<span class="hljs-string">&quot;$&#123;requestScope.list&#125;&quot;</span>&gt;<br>    $&#123; item &#125; --- $&#123; item.bookId &#125; --- $&#123; item.bookName &#125; &lt;br&gt;<br>&lt;/c:forEach&gt;<br></code></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="文件的上传"><a href="#文件的上传" class="headerlink" title="文件的上传"></a>文件的上传</h1><p>1、要有一个 form 标签，method&#x3D;post 请求</p>
+<p>2、form 标签的 encType 属性值必须为 multipart &#x2F; form-data 值</p>
+<p>3、在 form 标签中使用 input type&#x3D;file，添加上传的文件</p>
+<p>4、编写服务器代码接收，处理上传的数据</p>
+<p><strong>encType&#x3D;multipart&#x2F; form- data 表示提交的数据以多段的形式进行拼接，然后以二进制流的形式发送给服务器</strong></p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20230902142028954.png" srcset="/img/loading.gif" lazyload alt="image-20230902142028954"></p>
+<br>
+
+<p>我们一般使用 commons-fileupload.jar 完成文件的上传</p>
+<p>commons-fileupload.jar 需要依赖 commons-io.jar </p>
+<p><strong>常见的类和 API</strong></p>
+<ul>
+<li><p>ServletFileUpload 类，用于解析上传的数据</p>
+</li>
+<li><p>Fileltem 类，表示每一个表单项</p>
+</li>
+<li><p>boolean ServletFileUpload.isMultipartContent(HttpServletRequest request) 判断当前上传的数据格式是否是多段的格式</p>
+</li>
+<li><p>public List&lt;FileItem&gt; parseRequest(HttpServletRequest request) 解析上传的数据</p>
+</li>
+<li><p>boolean FileItem.isFormField() 判断当前这个表单项，是否是普通的表单项</p>
+<ul>
+<li>true 表示普通类型的表单项</li>
+<li>false 表示上传的文件类型</li>
+</ul>
+</li>
+<li><p>String FileItem.getFieldName() 获取表单项的 name 属性值</p>
+</li>
+<li><p>String FileItem.getString() 获取当前表单项的值</p>
+</li>
+<li><p>String FileItem.getName( ) 获取上传的文件名</p>
+</li>
+<li><p>void FileItem.write( file ) 将上传的文件写到参数 file 所指向的硬盘位置</p>
+</li>
+</ul>
+<br>
+
+<p>eg. 上传文件</p>
+<p>（1）a.jsp</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;body&gt;<br>    &lt;form action=<span class="hljs-string">&quot;http://localhost:8080/JspTry/a&quot;</span> method=<span class="hljs-string">&quot;post&quot;</span> enctype=<span class="hljs-string">&quot;multipart/form-data&quot;</span>&gt;<br>        姓名：&lt;input type=<span class="hljs-string">&quot;text&quot;</span> name=<span class="hljs-string">&quot;username&quot;</span>&gt; &lt;br&gt;<br>        &lt;input type=<span class="hljs-string">&quot;file&quot;</span> name=<span class="hljs-string">&quot;photo&quot;</span>&gt; &lt;br&gt;<br>        &lt;input type=<span class="hljs-string">&quot;submit&quot;</span> value=<span class="hljs-string">&quot;上传&quot;</span>&gt; &lt;br&gt;<br>    &lt;/form&gt;<br>&lt;/body&gt;<br></code></pre></td></tr></table></figure>
+
+<p>（2）a.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">a</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HttpServlet</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doPost</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br><br>        <span class="hljs-comment">// 先判断是否是多段数据</span><br>        <span class="hljs-keyword">if</span> (ServletFileUpload.isMultipartContent(req)) &#123;<br>            <span class="hljs-comment">// 创建 FileItemFactory 工厂实现类</span><br>            <span class="hljs-type">FileItemFactory</span> <span class="hljs-variable">fileItemFactory</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DiskFileItemFactory</span>();<br><br>            <span class="hljs-comment">// 创建用于解析上传数据的工具类</span><br>            <span class="hljs-type">ServletFileUpload</span> <span class="hljs-variable">servletFileUpload</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ServletFileUpload</span>(fileItemFactory);<br><br>            <span class="hljs-comment">// 解析上传的数据，得到一个表单项 FileItem</span><br>            <span class="hljs-keyword">try</span> &#123;<br>                List&lt;FileItem&gt; list = servletFileUpload.parseRequest(req);<br><br>                <span class="hljs-comment">// 循环判断每一个表单项，是普通类型，还是上传的文件</span><br>                <span class="hljs-keyword">for</span> (FileItem fileItem : list) &#123;<br>                    <span class="hljs-keyword">if</span> (fileItem.isFormField()) &#123;<br>                        <span class="hljs-comment">// 普通类型</span><br>                        System.out.println(<span class="hljs-string">&quot;表单项的 name = &quot;</span> + fileItem.getFieldName());<br>                        System.out.println(<span class="hljs-string">&quot;表单项的 value = &quot;</span> + fileItem.getString(<span class="hljs-string">&quot;UTF-8&quot;</span>));<br>                    &#125;<br>                    <span class="hljs-keyword">else</span> &#123;<br>                        <span class="hljs-comment">// 上传的文件</span><br>                        System.out.println(<span class="hljs-string">&quot;上传文件的 name 属性 = &quot;</span> + fileItem.getFieldName());<br>                        System.out.println(<span class="hljs-string">&quot;上传文件的 文件名 = &quot;</span> + fileItem.getName());<br><br>                        fileItem.write(<span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;d:\\&quot;</span> + fileItem.getName()));<br>                    &#125;<br>                &#125;<br><br>            &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(e);<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>（3）结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs null">文件已上传<br>表单项的 name = username<br>表单项的 value = cys<br>上传文件的 name 属性 = photo<br>上传文件的 文件名 = 11.jpg<br></code></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="文件的下载"><a href="#文件的下载" class="headerlink" title="文件的下载"></a>文件的下载</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">b</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HttpServlet</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doGet</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>        <span class="hljs-comment">// 获取要下载的文件名</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">downloadFileName</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;11.jpg&quot;</span>;<br><br>        <span class="hljs-comment">// 读取要下载的文件内容，ServletContext</span><br>        <span class="hljs-type">ServletContext</span> <span class="hljs-variable">servletContext</span> <span class="hljs-operator">=</span> getServletContext();<br>        <span class="hljs-type">InputStream</span> <span class="hljs-variable">resourceAsStream</span> <span class="hljs-operator">=</span> servletContext.getResourceAsStream(<span class="hljs-string">&quot;/file/&quot;</span> + downloadFileName);<br><br>        <span class="hljs-comment">// 获取要下载的文件的类型</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">mimeType</span> <span class="hljs-operator">=</span> servletContext.getMimeType(<span class="hljs-string">&quot;/file/&quot;</span> + downloadFileName);<br>        System.out.println(<span class="hljs-string">&quot;文件的类型 = &quot;</span> + mimeType);<br><br>        <span class="hljs-comment">// 再回传之前，通过响应头告诉客户端返回的数据类型</span><br>        resp.setContentType(mimeType);<br><br>        <span class="hljs-comment">// 在告诉客户端收到的数据是用于下载使用</span><br>        resp.setHeader(<span class="hljs-string">&quot;Content-Disposition&quot;</span>, <span class="hljs-string">&quot;attachment;filename=&quot;</span> + downloadFileName);<br><br>        <span class="hljs-comment">// 把下载的文件内容回传给客户端</span><br>        <span class="hljs-type">ServletOutputStream</span> <span class="hljs-variable">outputStream</span> <span class="hljs-operator">=</span> resp.getOutputStream();<br>        IOUtils.copy(resourceAsStream, outputStream);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>当传输的文件名含有中文时会导致错误，我们一般采用 URL 编码</p>
+<p>url 编码就是 将汉字转换为 %xxx%xxx 的格式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">name</span> <span class="hljs-operator">=</span> URLEncoder.encode(<span class="hljs-string">&quot;芜湖.jpg&quot;</span>, <span class="hljs-string">&quot;UTF-8&quot;</span>));<br></code></pre></td></tr></table></figure>
+
+<br>
+
+<p><strong>Base64 编码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Base64Test</span> &#123;<br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">Test</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> UnsupportedEncodingException &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;这是需要进行编码的字符串&quot;</span>;<br>        Base64.<span class="hljs-type">Encoder</span> <span class="hljs-variable">encoder</span> <span class="hljs-operator">=</span> Base64.getEncoder();<br>        <span class="hljs-type">byte</span>[] encode = encoder.encode(str.getBytes(<span class="hljs-string">&quot;UTF-8&quot;</span>));<br>        System.out.println(<span class="hljs-string">&quot;编码后的字节数组为 &quot;</span> + encode);<br><br>        <span class="hljs-comment">// 解码</span><br>        Base64.<span class="hljs-type">Decoder</span> <span class="hljs-variable">decoder</span> <span class="hljs-operator">=</span> Base64.getDecoder();<br>        <span class="hljs-type">byte</span>[] decode = decoder.decode(encode);<br>        System.out.println(<span class="hljs-string">&quot;解码后的字符串为 &quot;</span> + <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(decode, <span class="hljs-string">&quot;UTF-8&quot;</span>));<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="mvc"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h1><p>MVC全称：Model 模型、View 视图、Controller 控制器</p>
+<p>View 视图：只负责数据和界面的显示，不接受任何与显示数据无关的代码，便于程序员和美工的分工合作：JSP &#x2F; HTML</p>
+<p>Controller 控制器：只负责接收请求，调用业务层的代码处理请求，然后派发页面，是一个“调度者”的角色：Servlet</p>
+<p>Model 模型：将与业务逻辑相关的数据封装为具体的 JavaBean 类，其中不掺杂任何与数据处理相关的代码：JavaBean</p>
+<p>MVC是一种思想，理念是将软件代码拆分成为组件，单独开发，组合使用（目的还是为了解耦合）</p>
+<br>
+
+<p><strong>一个项目工程一般都分为前台和后台</strong></p>
+<ul>
+<li>前台是给普通用户使用，一般不需要权限检查， 就可以访问的资源</li>
+<li>后台是给管理员使用，一般都需要权限检查，才可以访问的资源 &#x2F; 页面</li>
+</ul>
+<br>
+
+<p>我们通过不同的路径区分前台和后台</p>
+<ul>
+<li>前台 &#x2F;client &#x2F; xxxServlet</li>
+<li>后台 &#x2F;manager&#x2F;xxxServlet</li>
+</ul>
+</font>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/JavaWeb/" class="category-chain-item">JavaWeb</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/JSP/">#JSP</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>JSP</div>
+      <div>http://example.com/post/78b18e67.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>firtree</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年8月30日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/7516ee1e.html" title="Cookie/Session">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Cookie/Session</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/8fe47ff4.html" title="JDBC">
+                        <span class="hidden-mobile">JDBC</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
