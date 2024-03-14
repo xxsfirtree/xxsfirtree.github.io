@@ -1,0 +1,1174 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="firtree">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Java虚拟机">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM">
+<meta property="og:url" content="http://example.com/post/66c016fb.html">
+<meta property="og:site_name" content="firtree">
+<meta property="og:description" content="Java虚拟机">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240223094937352.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240223095950343.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240223112057091.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240223113121855.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240223113546096.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240223113838963.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240224094128227.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240224100213119.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240224102131642.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240225161419107.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240225162908743.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240225165506458.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240225170931095.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240225171418544.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240225171815312.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240225171942913.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226075909463.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226081140862.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226081237815.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226081339756.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226084632215.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226091535197.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226102751239.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/7E4510D9D5854A7B938AB7208BB0B09E.jpg">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226103624995.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226104800717.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226144042614.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226145720863.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226152038112.png">
+<meta property="og:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226153058816.png">
+<meta property="article:published_time" content="2024-03-14T08:20:27.000Z">
+<meta property="article:modified_time" content="2024-03-14T08:24:17.546Z">
+<meta property="article:author" content="firtree">
+<meta property="article:tag" content="JVM">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240223094937352.png">
+  
+  
+  
+  <title>JVM - firtree</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Firtree</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>archive</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>category</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>tag</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>about</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="JVM"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-14 16:20" pubdate>
+          2024年3月14日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          81 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JVM</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <font size="3">
+
+<meta name="referrer" content="no-referrer">
+
+<h2 id="类的生命周期"><a href="#类的生命周期" class="headerlink" title="类的生命周期"></a>类的生命周期</h2><p>类的生命周期描述了一个类加载、使用、卸载的整个过程【高频面试题】</p>
+<h3 id="一-加载loading阶段"><a href="#一、加载-Loading-阶段" class="headerlink" title="一、加载(Loading)阶段"></a>一、加载(Loading)阶段</h3><p>1、是类加载器根据类的全限定名通过不同的渠道以二进制流的方式获取字节码信息</p>
+<p>2、类加载器在加载完类之后，Java虚拟机会将字节码中的信息保存到方法区中</p>
+<p>3、生成一个InstanceKlass对象，保存类的所有信息，里边还包含实现特定功能比如多态的信息</p>
+<p>4、同时，Java虚拟机还会在堆中生成一份与方法区中数据类似的java.lang.Class对象，作用是在Java代码中去获取类的信息以及存储静态字段的数据(JDK8及之后)</p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240223094937352.png" srcset="/img/loading.gif" lazyload alt="image-20240223094937352"></p>
+<p>推荐使用JDK自带的hsdb工具查看Java虚拟机内存信息。位于JDK安装目录下lib文件夹中的sa-jdi.jar中</p>
+<p>启动命令：<code>java -cp sa-jdi.jar sun.jvm.hotspot.HSDB</code></p>
+<br>
+
+<p>cmd中的jps命令会显示所有的java进程以及进程id</p>
+<br>
+
+<h3 id="二-连接阶段"><a href="#二、连接阶段" class="headerlink" title="二、连接阶段"></a>二、连接阶段</h3><p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240223095950343.png" srcset="/img/loading.gif" lazyload alt="image-20240223095950343"></p>
+<p>1、验证</p>
+<ul>
+<li>文件格式校验</li>
+<li>元信息校验（例如类必须有父类）</li>
+<li>验证程序执行指令的语义，比如方法内的指令执行到一半强行跳转到其他方法中</li>
+<li>符号引用验证，例如是否访问了其它类中的private方法</li>
+</ul>
+<p>2、准备</p>
+<p>准备阶段为静态变量(static) 分配内存并设置初始值</p>
+<p>final修饰的基本数据类型的静态变量，准备阶段直接会将代码中的值进行赋值</p>
+<p>3、解析</p>
+<p>解析阶段主要是将常量池中的符号引用替换为直接引用</p>
+<p>符号引用就是在字节码文件中使用编号来访问常量池中的内容</p>
+<br>
+
+<h3 id="三-初始化阶段"><a href="#三、初始化阶段" class="headerlink" title="三、初始化阶段"></a>三、初始化阶段</h3><p>初始化阶段会执行静态代码块中的代码，并为静态变量赋值</p>
+<p>初始化阶段会执行字节码文件中 clinit 部分的字节码指令</p>
+<p><strong>以下几种方式会导致类的初始化：</strong></p>
+<ul>
+<li>访问一个类的静态变量或者静态方法，注意变量是final修饰的并且等号右边是常量不会触发初始化</li>
+<li>调用Class.forName(String className)，可以通过传参指定不被初始化</li>
+<li>new一个该类的对象时</li>
+<li>执行Main方法的当前类</li>
+</ul>
+<p><strong>PS：数组的创建不会导致数组中元素的类进行初始化</strong></p>
+<p><strong>直接访问父类的静态变量，不会触发子类的初始化。子类的初始化cinit调用之前会先调用父类的cinit初始化方法</strong></p>
+<p><strong>final修饰的变量如果赋值的内容需要执行指令才能得出结果，会执行clinit方法进行初始化</strong></p>
+<br>
+
+<h2 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h2><p>是Java虚拟机提供给应用程序去实现获取类和接口字节码数据的技术</p>
+<h3 id="类加载器的分类"><a href="#类加载器的分类" class="headerlink" title="类加载器的分类"></a>类加载器的分类</h3><p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240223112057091.png" srcset="/img/loading.gif" lazyload alt="image-20240223112057091"></p>
+<p><strong>启动类加载器</strong></p>
+<p>启动类加载器(Bootstrap ClassLoader)是由Hotspot虚拟机提供的、使用C+ +编写的类加载器。</p>
+<p>默认加载Java安装目录&#x2F;jre&#x2F;lib下的类文件，比如rt.iar</p>
+<p>这类加载器是虚拟机底层实现的，在java代码中不能获取到启动类加载器</p>
+<p><code>String.class.getClassLoader() 的结果是 null</code></p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240223113121855.png" srcset="/img/loading.gif" lazyload alt="image-20240223113121855"></p>
+<br>
+
+<p><strong>扩展类加载器&amp;应用程序类加载器</strong></p>
+<p>扩展类加载器和应用程序类加载器都是JDK中提供的、使用Java编写的类加载器</p>
+<p>它们的源码都位于sun.misc.Launcher中，是一个静态内部类。继承自URLClassLoader。具备通过目录或者指定jar包将字节码文件加载到内存中</p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240223113546096.png" srcset="/img/loading.gif" lazyload alt="image-20240223113546096"></p>
+<p>扩展类加载器(Extension Class Loader)默认加载Java安装目录&#x2F;jre&#x2F;lib&#x2F;ext下的类文件</p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240223113838963.png" srcset="/img/loading.gif" lazyload alt="image-20240223113838963"></p>
+<br>
+
+<p>应用程序类加载器加载classpath下的以及第三方jar包中的类文件</p>
+<br>
+
+<h3 id="双亲委派机制"><a href="#双亲委派机制" class="headerlink" title="双亲委派机制"></a>双亲委派机制</h3><p>由于Java虚拟机中有多个类加载器，双亲委派机制的核心是解决一个类到底由谁加载的问题</p>
+<p>双亲委派机制指的是：当一个类加载器接收到加载类的任务时</p>
+<ul>
+<li>会自底向上查找是否加载过  –保证每个类只被加载一次</li>
+<li>再由顶向下进行加载              –保证类加载的优先级</li>
+</ul>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240224094128227.png" srcset="/img/loading.gif" lazyload alt="image-20240224094128227"></p>
+<p>父类加载器的小细节</p>
+<p>应用程序类加载器的parent是扩展类加载器，而扩展类加载器的parent是null，因为启动类加载器是底层实现的加载器，在程序中不能被获取到</p>
+<p><strong>Q：类的双亲委派机制是什么</strong></p>
+<ol>
+<li>当一个类加载器去加载某个类的时候，会自底向上查找是否加载过，如果加载过就直接返回，如果一直到最顶层的类加载器都没有加载，再由顶向下进行加载</li>
+<li>应用程序类加载器的父类加载器是扩展类加载器，扩展类加载器的父类加载器是启动类加载器</li>
+<li>双亲委派机制的好处有两点：<ul>
+<li>第一是避免恶意代码替换JDK中的核心类库, 比如java.lang.String，确保核心类库的完整性和安全性</li>
+<li>第二是避免一个类重复地被加载</li>
+</ul>
+</li>
+</ol>
+<br>
+
+<h3 id="打破双亲委派机制"><a href="#打破双亲委派机制" class="headerlink" title="打破双亲委派机制"></a>打破双亲委派机制</h3><p>打破双亲委派机制的三种方式：</p>
+<p>自定义加载器、线程上下文类加载器、Osgi框架的类加载器</p>
+<br>
+
+<h4 id="自定义加载器"><a href="#自定义加载器" class="headerlink" title="自定义加载器"></a>自定义加载器</h4><p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240224100213119.png" srcset="/img/loading.gif" lazyload alt="image-20240224100213119"></p>
+<p>自定义加载器的父类加载器默认是应用程序加载器</p>
+<p>一个类如果被两个不同的类加载器加载，不会出现冲突，会被认为是两个不同的类</p>
+<p><strong>正确的实现一个类加载器的方法应该是重写findClass方法，这样不会破坏双亲委派机制</strong></p>
+<br>
+
+<h4 id="线程上下文类加载器"><a href="#线程上下文类加载器" class="headerlink" title="线程上下文类加载器"></a>线程上下文类加载器</h4><p>JDBC中使用了DriverManager来管理项目中引入的不同数据库的驱动，比如mysqI驱动、 oracle驱动</p>
+<p>以JDBC为例，DriverManager使用了SPI技术获取驱动</p>
+<p>SPI机制就是在调用load方法时，获取了线程上下文中保存的应用程序类加载器，然后使用这个加载器加载类并创建对象</p>
+<p><strong>在线程被创建后，这个线程的加载器默认就是应用程序类加载器，可以自定义修改</strong></p>
+<p><code>Thread.currentThread().setContextClassLoader(xxx)</code></p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240224102131642.png" srcset="/img/loading.gif" lazyload alt="image-20240224102131642"></p>
+<p>Q：JDBC案例中真的打破了双亲委派机制吗?</p>
+<p>（1）打破了双亲委派机制</p>
+<p>这种由启动类加载器加载的类，委派应用程序类加载器去加载类的方式，打破了双亲委派机制</p>
+<p>（2）没有打破双亲委派机制</p>
+<p>JDBC只是在DriverManager加载完之后，通过初始化阶段触发了驱动类的加载，类的加载依然遵循双亲委派机制</p>
+<br>
+
+<h2 id="运行时数据区域"><a href="#运行时数据区域" class="headerlink" title="运行时数据区域"></a>运行时数据区域</h2><ul>
+<li>线程不共享：程序计数器、Java虚拟机栈、本地方法栈</li>
+<li>线程共享：方法区、堆</li>
+</ul>
+<br>
+
+<h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>程序计数器(Program Counter Register)也叫PC寄存器，每个线程会通过程序计数器记录当前要执行的的字节码指令的地址</p>
+<p>Q：程序计数器会出现内存溢出吗？</p>
+<p>因为每个线程只存储一个固定长度的内存地址，程序计数器是不会发生内存溢出的</p>
+<br>
+
+<h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><p>每个线程有各自的栈和栈帧</p>
+<p>栈帧的组成：</p>
+<ul>
+<li>局部变量表：是在运行过程中存放所有的局部变量</li>
+<li>操作数栈：是栈帧中虚拟机在执行指令过程中用来存放临时数据的一块区域</li>
+<li>帧数据：主要包含动态链接、方法出口、异常表的引用</li>
+</ul>
+<br>
+
+<p>（1）局部变量表</p>
+<p>为了节省空间，局部变量表中的槽是可以复用的，一旦某个局部变量不再生效，当前槽就可以再次被使用</p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240225161419107.png" srcset="/img/loading.gif" lazyload alt="image-20240225161419107"></p>
+<p>（2）操作数栈</p>
+<p> 在编译期就可以确定操作数栈的最大深度，从而在执行时正确的分配内存大小</p>
+<p>（3）帧数据</p>
+<p>当前类的字节码指令引用了其他类的属性或者方法时，需要将符号引用(编号)转换成对应的运行时常量池中的内存地址。<strong>动态链接</strong>就保存了编号到运行时常量池的内存地址的映射关系。</p>
+<p> 方法出口指的是方法在正确或者异常结束时，当前栈帧会被弹出，同时程序计数器应该指向上一个栈帧中的下一条指令的地址。所以在当前栈帧中，需要存储此<strong>方法出口</strong>的地址。</p>
+<p>异常表存放的是代码中异常的处理信息，包含了异常捕获的生效范围以及异常发生后跳转到的字节码指令位置。</p>
+<br>
+
+<p>Q：java虚拟机栈会出现内存溢出吗？</p>
+<ul>
+<li><p>Java虚拟机栈如果栈帧过多，占用内存超过栈内存可以分配的最大大小就会出现内存溢出</p>
+</li>
+<li><p>Java虚拟机栈内存溢出时会出现StackOverflowError的错误</p>
+</li>
+</ul>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240225162908743.png" srcset="/img/loading.gif" lazyload alt="image-20240225162908743"></p>
+<p><strong>需要注意的是：</strong></p>
+<ul>
+<li>HotSpot JVM对栈大小的最大值和最小值有要求：Windows ( 64位)下的DK8测试最小值为180k，最大值为1024m</li>
+<li>局部变量过多、操作数栈深度过大也会影响栈内存的大小</li>
+</ul>
+<p>一般情况下，工作中即便使用了递归进行操作，栈的深度最多也只能到几百，不会出现栈的溢出。所以此参数可以手动指定为**-Xss256k**节省内存</p>
+<br>
+
+<h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><p>一般Java程序中堆内存是空间最大的一块内存区域。创建出来的对象都存在于堆上</p>
+<p>栈上的局部变量表中，可以存放堆上对象的引用。静态变量也可以存放堆对象的引用，通过静态变暈就可以实现对象在线程之间共享</p>
+<p>Q：堆会出现内存溢出吗？</p>
+<p>堆内存大小是有上限的，当对象一直向堆中放入对象达到上限之后，就会抛出OutOfMemory错误</p>
+<p>随着堆中的对象增多，当total可以使用的内存即将不足时，java虚拟机会继续分配内存给堆，total最多只能与max相等</p>
+<p><strong>需要注意的是：</strong></p>
+<p>并不是<code>total == max</code>时发生内存溢出，当totalu远小于max时就会发生内存溢出</p>
+<p>如果不设置任何的虚拟机参数，max默认是系统内存的1&#x2F;4，total默认是系统内存的1&#x2F;64</p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240225165506458.png" srcset="/img/loading.gif" lazyload alt="image-20240225165506458"></p>
+<p>Q：为什么arthas中显示的heap堆大小与设置的值不一样呢?</p>
+<p>arthas中的heap堆内存使用了JMX技术中内存获取方式，这种方式与垃圾回收器有关，计算的是可以分配对象的内存，而不是整个内存</p>
+<br>
+
+<p>Java服务端程序开发时，建议将-Xmx和-Xms设置为相同的值，这样在程序启动之后可使用的总内存就是最大内存，而无需向java虚拟机再次申请，减少了申请并分配内存时间上的开销，同时也不会出现内存过剩之后堆收缩的情况</p>
+<br>
+
+<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><p>方法区是存放基础信息的位置，线程共享，主要包含三部分内容：</p>
+<ul>
+<li>类的元信息：保存了所有类的基本信息</li>
+<li>运行时常量池：保存了字节码文件中的常量池内容</li>
+<li>字符串常量池：保存了字符串常量</li>
+</ul>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240225170931095.png" srcset="/img/loading.gif" lazyload alt="image-20240225170931095"></p>
+<p>Q：String.intern()方法</p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240225171418544.png" srcset="/img/loading.gif" lazyload alt="image-20240225171418544"></p>
+<p>JDK6版本中intern ()方法会把第一次遇到的字符串实例复制到永久代的字符串常量池中，返回<br>的也是永久代里面这个字符串实例的引用。JVM启动时就会自动把java加入到常量池中</p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240225171815312.png" srcset="/img/loading.gif" lazyload alt="image-20240225171815312"></p>
+<p>JDK7及之后版本中由于字符串常量池在堆上，所以intern () 方法会把第一次遇到的字符串的引<br>用放入字符串常量池</p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240225171942913.png" srcset="/img/loading.gif" lazyload alt="image-20240225171942913"></p>
+<br>
+
+<h3 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h3><p>为了在NIO使用过程中减少对用户体验的影响，以及提高读写文件的效率</p>
+<p>Q：直接内存会出现内存溢出吗？</p>
+<p>会</p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226075909463.png" srcset="/img/loading.gif" lazyload alt="image-20240226075909463"></p>
+<p><strong>总结：</strong></p>
+<p>运行时数据区分成哪几部分，每一部分的作用是什么？</p>
+<p>（1）程序计数器，每个线程会通过程序计数器记录当前要执行的的字节码指令的地址，程序计数器可以控制程序指令的进行，实现分支、跳转、异常等逻辑</p>
+<p>（2）Java虚拟机栈、本地方法栈</p>
+<p>虚拟机栈采用栈的数据结构来管理方法调用中的基本数据(局部变量、操作数等)，每一个方法的调用使用一个栈帧来保存</p>
+<p>（3）堆</p>
+<p>堆中存放的是创建出来的对象，这也是最容易产生内存溢出的位置</p>
+<p>（4）方法区</p>
+<p>方法区中主要存放的是类的元信息，同时还保存了常量池</p>
+<br>
+
+<p>不同JDK版本之间运行时数据区域的区别是什么？</p>
+<p>JDK6中，方法区存放在堆里，叫做永久代，字符串常量池在方法区中</p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226081140862.png" srcset="/img/loading.gif" lazyload alt="image-20240226081140862"></p>
+<p>JDK7中，字符串常量池独立存在于堆上</p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226081237815.png" srcset="/img/loading.gif" lazyload alt="image-20240226081237815"></p>
+<p>JDK8，方法区就不是存放在永久代而是元空间（直接内存一部分）中</p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226081339756.png" srcset="/img/loading.gif" lazyload alt="image-20240226081339756"></p>
+<br>
+
+<h2 id="自动垃圾回收机制"><a href="#自动垃圾回收机制" class="headerlink" title="自动垃圾回收机制"></a>自动垃圾回收机制</h2><p>内存泄漏指的是不再使用的对象在系统中未被回收，内存泄漏的积累可能会导致内存溢出</p>
+<p>Java中为了简化对象的释放，引入了自动的垃圾回收(Garbage Collection简称GC)机制。通过垃圾回收器来对不再使用的对象完成自动的回收，垃圾回收器主要负责对堆上的内存进行回收</p>
+<br>
+
+<p>垃圾回收的对比</p>
+<p>（1）自动垃圾回收：自动根据对象是否使用由虚拟机来回收对象</p>
+<p>优点：降低程序员实现难度、降低对象回收bug的可能性</p>
+<p>缺点：程序员无法控制内存回收的及时性</p>
+<p>（2）手动垃圾回收：由程序员编程实现对象的删除</p>
+<p>优点：回收及时性高，由程序员把控回收的时机</p>
+<p>缺点：编写不当容易出现悬空指针、重复释放、内存泄漏等问题</p>
+<br>
+
+<p>如果需要手动触发垃圾回收，可以调用System.gc()方法</p>
+<p>调用System. gc( )方法并不一定会立即回收垃圾，仅仅是向Java虛拟机发送一个垃圾回收的请求，具体是否需要执行垃圾回收Java虚拟机会自行判断</p>
+<br>
+
+<p>线程不共享的部分，都是伴随着线程的创建而创建，线程的销毁而销毁。而方法的栈帧在执行完方法之后就会自动弹出栈并释放掉对应的内存。这些部分都不需要进行垃圾回收</p>
+<br>
+
+<h3 id="方法区的回收"><a href="#方法区的回收" class="headerlink" title="方法区的回收"></a>方法区的回收</h3><p>判定个一个类可以被卸载。需要同时满足下面三个条件：</p>
+<p>1、此类所有实例对象都已经被回收，在堆中不存在任何该类的实例对象以及子类对象</p>
+<p>2、加载该类的类加载器已经被回收</p>
+<p>3、该类对应的java.lang.Class对象没有在任何地方被引用</p>
+<br>
+
+<p>开发中方法区的回收一般很少出现，因为类的加载器是应用程序类加载器，而应用程序类加载器不会被回收，则上述条件二不满足</p>
+<p>主要在如OSGi、JSP 的热部署等应用场景中。每个jsp文件对应一个唯一的类加载器，当一个jsp文件修改了，就直接卸载这个jsp类加载器。重新创建类加载器，重新加载jsp文件</p>
+<h3 id="堆回收"><a href="#堆回收" class="headerlink" title="堆回收"></a>堆回收</h3><p>Java中的对象是否能被回收，是根据对象是否被引用来决定的。如果对象被引用了，说明该对象还在使用，不允许被回收</p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226084632215.png" srcset="/img/loading.gif" lazyload alt="image-20240226084632215"></p>
+<h4 id="引用计数法amp可达性分析法"><a href="#引用计数法-amp-可达性分析法" class="headerlink" title="引用计数法&amp;可达性分析法"></a>引用计数法&amp;可达性分析法</h4><p><strong>引用计数法</strong></p>
+<p>引用计数法会为每个对象维护一个引用计数器，当对象被引用时加1，取消引用时减1</p>
+<p>优点是实现简单，但是有缺点：</p>
+<ul>
+<li>每次引用和取消引用都需要维护计数器，对系统性能会有一定的影响</li>
+<li>存在循环引用问题，所谓循环引用就是当A引用B，B同时引用A时会出现对象无法回收的问题，如上述例子</li>
+</ul>
+<br>
+
+<p><strong>可达性分析法</strong></p>
+<p>java就是使用这种算法来判断对象是否可以被回收，可达性分析将对象分为两类：垃圾回收的根对象(GC Root)和普通对象，对象与对象之间存在引用关系</p>
+<p>可达性分析算法指的是如果从GC Root对象到某个普通对象是可达的，该普通对象就不可被回收</p>
+<br>
+
+<p>哪些对象被称之为GC Root对象呢？</p>
+<ul>
+<li>线程Thread对象，引用线程栈帧中的方法参数、局部变量等</li>
+<li>系统类加载器加载的java.lang.Class对象，引用类中的静态变量</li>
+<li>监视器对象，用来保存同步锁synchronized关键字持有的对象</li>
+<li>本地方法调用时使用的全局对象</li>
+</ul>
+<br>
+
+<h4 id="五种对象引用"><a href="#五种对象引用" class="headerlink" title="五种对象引用"></a>五种对象引用</h4><ul>
+<li>强引用，就是可达性分析算法中描述的关系</li>
+<li>软引用</li>
+<li>弱引用</li>
+<li>虚引用</li>
+<li>终结器引用</li>
+</ul>
+<br>
+
+<p><strong>软引用</strong></p>
+<p>相对于强引用是一种比较弱的引用关系，如果一个对象只有软引用关联到它，当程序内存不足时，就会将软引用中的数据进行回收</p>
+<p>提供了SoftReference类来实现软引用，常用于缓存中</p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226091535197.png" srcset="/img/loading.gif" lazyload alt="image-20240226091535197"></p>
+<p>软引用中的对象如果在内存不足时回收，SoftReference对象本身也需要被回收。如何知道哪些SoftReference对象需要回收呢？</p>
+<p>SoftReference提供了一套队列机制：</p>
+<p>1、软引用创建时，通过构造器传入引用队列</p>
+<p>2、在软引用中包含的对象被回收时，该软引用对象会被放入引用队列</p>
+<p>3、通过代码遍历引用队列，将SoftReference的强引用删除</p>
+<br>
+
+<p><strong>弱引用</strong></p>
+<p>整体机制和软引用基本一致，区别在于弱引用包含的对象在垃圾回收时，不管内存够不够都会直接被回收，也可以使用引用队列进行回收</p>
+<p>提供了WeakReference类来实现弱引用，常用于ThreadLocal中</p>
+<br>
+
+<p><strong>虚引用&amp;终结器引用</strong></p>
+<p>这两种引用在常规开发中是不会使用的</p>
+<p>虚引用也叫幽灵引用&#x2F;幻影引用，不能通过虚引用对象获取到包含的对象。虚引用唯一的用途是当对象被垃圾回收器回收时可以接收到对应的通知。</p>
+<p>Java中使用PhantomReference实现了虚引用，直接内存中为了及时知道直接内存对象不再使用，从而回收内存，使用了虚引用来实现</p>
+<br>
+
+<p>终结器引用指的是在对象需要被回收时，对象将会被放置在Finalizer类中的引用队列中，并在稍后由一条由FinalizerThread线程从队列中获取对象，然后执行对象的finalize方法。</p>
+<p>在这个过程中可以在finalize方法中再将自身对象使用强引用关联上，但是不建议这样做，如果耗时过长会影响其他对象的回收</p>
+<br>
+
+<h4 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h4><p>垃圾回收要做的事：</p>
+<p>找到内存中存活的对象、释放不再存活的内存，使程序能再次利用这部分空间</p>
+<p>Java垃圾回收过程会通过单独的GC线程来完成，但是不管使用哪一种GC算法，都会有部分阶段需要停止所有的用户线程。这个过程被称之为Stop The World简称STW，如果STW时间过长则会影响用户的使用</p>
+<br>
+
+<p><strong>判断GC算法是否优秀，可以从三方面考虑</strong></p>
+<p>1、吞吐量：CPU用于执行用户代码的时间与CPU总执行时间的比值</p>
+<p>2、最大暂停时间：所有在垃圾回收过程中的STW时间最大值</p>
+<p>3、堆使用效率</p>
+<p>上述三种评价标准不可兼得。一般来说，堆内存越大，最大暂停时间就越长。想要减少最大暂停时间，就会降低吞吐量。所以不同的垃圾回收算法，适用于不同的场景</p>
+<br>
+
+<p><strong>标记清除算法</strong></p>
+<p>1、标记阶段：将所有存活的对象进行标记。Java中使用可达性分析算法，从GC Root开始通过引用链遍历出所有存活对象</p>
+<p>2、清除阶段：从内存中删除没有被标记也就是非存活对象</p>
+<p>优点：实现简单</p>
+<p>缺点：</p>
+<p>1、碎片化问题</p>
+<p>由于内存是连续的，所以在对象被删除之后，内存中会出现很多细小的可用内存单元。如果我们需要的是一个比较大的空间，很有可能这些内存单元的大小过小无法进行分配</p>
+<p>2、分配速度比较慢</p>
+<p>由于内存碎片的存在，需要维护一个空闲链表，极有可能发生每次需要遍历到链表的最后才能获得合适的内存空间</p>
+<br>
+
+<p><strong>复制算法</strong></p>
+<p>1、准备两块空间From空间和To空间，每次在对象分配阶段只能使用其中一块空间(From空间)</p>
+<p>2、在垃圾回收GC阶段将From中存活对象复制到To空间</p>
+<p>3、将两块空间的From和To名字互换</p>
+<p>优点：</p>
+<p>吞吐量高（只需要遍历一次存活对象复制到To空间即可）</p>
+<p>不会发生碎片化，复制算法在复制之后就会将对象按顺序放入To空间中，不存在碎片化内存空间</p>
+<p>缺点：</p>
+<p>内存使用效率低，每次只有一半的空间可以为创建对象使用</p>
+<br>
+
+<p><strong>标记整理算法</strong></p>
+<p>是对 标记清理算法中产生内存碎片问题 的一种解决方案，分为两个阶段</p>
+<p>1、标记阶段，将所有存活对象进行标记</p>
+<p>2、整理阶段，将所有存活对象都移动到推的一端</p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226102751239.png" srcset="/img/loading.gif" lazyload alt="image-20240226102751239"></p>
+<p>优点：内存使用率高、不会发生碎片化</p>
+<p>缺点：整理阶段的效率不高</p>
+<p>整理算法有很多种，比如Lisp2整理算法需要对整个堆中的对象搜索3次，整体性能不佳。可以通过Two-Finger、表格算法、Immi xGC等高效的整理算法优化此阶段的性能</p>
+<br>
+
+<p><strong>分代GC算法</strong></p>
+<p>将上述描述的垃圾回收算法组合进行使用，应用最广</p>
+<p>分代垃圾回收将整个内存区域划分为年轻代（存活时间短）和老年代（存活时间长）</p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/7E4510D9D5854A7B938AB7208BB0B09E.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226103624995.png" srcset="/img/loading.gif" lazyload alt="image-20240226103624995"></p>
+<br>
+
+<p>分代回收时，创建出来的对象，首先会被放入Eden伊甸园区</p>
+<p>随着对象在Eden区越来越多，如果Eden区满，新创建的对象已经无法放入，就会触发年轻代的GC，称为Minor GC或者Young GC</p>
+<p>Minor GC会把eden中和From需要回收的对象回收，把没有回收的对象放入To区</p>
+<p>接下来，S0变成To区，S1变成From区。当eden区满时再往里放入对象，依然会发生Minor GC</p>
+<p>每次Minor GC中都会为对象记录他的年龄，初始值为0，每次GC完加1。如果Minor GC后对象的年龄达到阈值(最大15, 默认值和垃圾回收器有关)，对象就会被晋升至老年代</p>
+<p>当整个新生代的空间都被使用时，先尝试Minor GC，把未达到年龄阈值但是最老的对象放入老年代，如果老年代空间也被占满了，会触发Full GC（回收整个堆的所有对象）</p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226104800717.png" srcset="/img/loading.gif" lazyload alt="image-20240226104800717"></p>
+<br>
+
+<ul>
+<li>系统中的大部分对象，都是创建出来之后很快就不再使用可以被回收</li>
+<li>老年代中会存放长期存活的对象， 比如Spring的大部分bean对象，在程序启动之后就不会被回收了</li>
+<li>在虚拟机的默认设置中，新生代大小要远小于老年代的大小</li>
+</ul>
+<p>为什么分代GC算法要把堆分成年轻代和老年代？</p>
+<p>1、可以通过调整年轻代和老年代的比例来适应不同类型的应用程序，提高内存的利用率和性能</p>
+<p>2、新生代和老年代使用不同的垃圾回收算法，新生代一般选择复制算法， 老年代可以选择标记清除和标记整理算法，由程序员来选择灵活度较高</p>
+<p>3、分代的设计中允许只回收新生代(minor gc)，如果能满足对象分配的要求就不需要对整个堆进行回收(fullgc)，STW时间就会减少</p>
+<br>
+
+<h4 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h4><p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226144042614.png" srcset="/img/loading.gif" lazyload alt="image-20240226144042614"></p>
+<br>
+
+<p><strong>年轻代-Serial垃圾回收器</strong></p>
+<p>Serial是是一种<strong>单线程串行</strong>回收年轻代的垃圾回收器，使用复制算法</p>
+<br>
+
+<br>
+
+<p><strong>老年代-SerialOld垃圾回收器</strong></p>
+<p>SerialOld是Serial垃圾回收器的老年代版本，采用单线程串行回收，使用标记整理算法</p>
+<p>优点：单CPU处理器下吞吐量非常出色</p>
+<p>缺点：多CPU下吞吐量不如其他垃圾回收器，堆如果偏大会让用户线程处于长时间的等待</p>
+<p>适用场景：Java编写的客户端程序或者硬件配置有限的场景</p>
+<br>
+
+<br>
+
+<p><strong>年轻代-ParNew垃圾回收器</strong></p>
+<p>ParNew垃圾回收器本质上是对Serial在多CPU下的优化，使用<strong>多线程</strong>进行垃圾回收，使用复制算法</p>
+<p>优点：多CPU处理器下停顿时间较短</p>
+<p>缺点：吞吐量和停顿时间不如G1，所以在JDK9之后不建议使用</p>
+<p>适用场景：JDK8及之前的版本中，与CMS老年代垃圾回收器搭配使用</p>
+<br>
+
+<br>
+
+<p><strong>老年代-CMS垃圾回收器</strong></p>
+<p>CMS垃圾回收器关注的是系统的暂停时间，允许用户线程和垃圾回收线程在某些步骤中同时执行，减少了用户线程的等待时间，使用标记清除算法</p>
+<p>优点：系统由于垃圾回收出现的停顿时间较短，用户体验好</p>
+<p>缺点：<br>1、内存碎片问题，由于使用的是标记清除算法<br>2、退化问题，某些情况下会退化成SerialOld垃圾回收器<br>3、浮动垃圾问题</p>
+<p>适用场景：大型的互联网系统中用户请求数据量大、频率高的场景，比如订单接口、商品接口等</p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226145720863.png" srcset="/img/loading.gif" lazyload alt="image-20240226145720863"></p>
+<p><strong>CMS存在的问题：</strong></p>
+<p>1、CMS使用了标记清除算法，在垃圾收集结束之后会出现大量的内存碎片，CMS会在Full GC时进行碎片的整理。这样会导致用户线程暂停</p>
+<p>2、无法处理在并发清理过程中产生的“浮动垃圾”，不能做到完全的垃圾回收</p>
+<p>3、如果老年代内存不足无法分配对象，CMS就会退化成Serial Old单线程回收老年代</p>
+<br>
+
+<br>
+
+<p><strong>年轻代-Parallel Scavenge</strong></p>
+<p>Parallel Scavenge是JDK8默认的年轻代垃圾回收器，<strong>多线程并行回收</strong>，关注的是系统的吞吐量，具备<strong>自动调整堆内存大</strong>小的特点，使用复制算法</p>
+<p>优点：吞吐量高，而且手动可控，为了提高吞吐量，虚拟机会动态调整堆的参数</p>
+<p>缺点：不能保证单次的停顿时间</p>
+<p>适用场景：后台任务，不需要与用户交互，并且容易产生大量的对象，比如大数据的处理、大文件导出</p>
+<br>
+
+<p><strong>老年代-Parallel Old</strong></p>
+<p>Parallel Old是为Parallel Scavenge收集器设计的老年代版本，利用<strong>多线程并行</strong>收集，使用标记整理算法</p>
+<p>优点：并发收集，在多核CPU下效率较高</p>
+<p>缺点：暂停时间会比较长</p>
+<br>
+
+<p><strong>G1垃圾回收器</strong></p>
+<p>JDK9之后默认的垃圾回收器是G1 (Garbage First)垃圾回收器</p>
+<p>Parallel Scavenge关注吞吐量，允许用户设置最大暂停时间，但是会减少年轻代可用空间的大小；CMS关注暂停时间，但是吞吐量方面会下降</p>
+<p>而G1设计目标就是将上述两种垃圾回收器的优点融合：</p>
+<ol>
+<li>支持巨大的堆空间回收，并有较高的吞吐量</li>
+<li>支持多CPU并行垃圾回收</li>
+<li>允许用户设置最大暂停时间</li>
+</ol>
+<br>
+
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226152038112.png" srcset="/img/loading.gif" lazyload alt="image-20240226152038112"></p>
+<p>G1垃圾回收有两种方式：年轻代回收和混合回收</p>
+<p>年轻代回收(Young GC) ，回收Eden区和Survivor区中不用的对象。会导致STW，G1中可以通过参数-XX:MaxGCPauseMillis&#x3D;n (默认200) 设置每次垃圾回收时的最大暂停时间毫秒数，G1垃圾回收器会尽可能地保证暂停时间</p>
+<p>G1在进行Young GC的过程中会去记录每次垃圾回收时每个Eden区和Survivor区的平均耗时，以作为下次回收时的参考依据。使用的是复制算法</p>
+<p>部分对象如果大小超过Region的一半，会直接放入老年代，这类老年代被称为Humongous区，如果对象过大会横跨多个Region</p>
+<p>多次回收之后，会出现很多Old老年代区，此时总堆占有率达到阈值时（-XX: InitiatingHeapOccupancyPercent默认45%）会触发混合回收MixedGC。回收所有年轻代和部分老年代的对象以及大对象区。采用复制算法来完成。</p>
+<p><img src="https://gitee.com/Greedy_firtree/picture/raw/master/blog/image-20240226153058816.png" srcset="/img/loading.gif" lazyload alt="image-20240226153058816"></p>
+<p>注意：如果清理过程中发现没有足够的空Region存放转移的对象，会出现Full GC。单线程执行标记整理算法，此时会导致用户线程的暂停。所以尽量保证应该用的堆内存有一定多余的空间</p>
+<p>优点：对比较大的堆如超过6G的堆回收时，延迟可控；不会产生内存碎片；并发标记的SATB算法效率高</p>
+<br>
+
+
+
+
+
+</font>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/JAVA/" class="category-chain-item">JAVA</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/JVM/">#JVM</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>JVM</div>
+      <div>http://example.com/post/66c016fb.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>firtree</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年3月14日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/bae4ff13.html" title="Redis">
+                        <span class="hidden-mobile">Redis</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
